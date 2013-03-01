@@ -1,0 +1,2206 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\let\stdpart\part
+\renewcommand\part{\newpage\stdpart}
+
+\usepackage{indentfirst}
+\end_preamble
+\use_default_options true
+\begin_modules
+customHeadersFooters
+enumitem
+fixltx2e
+fix-cm
+braille
+initials
+figs-within-sections
+tabs-within-sections
+eqs-within-sections
+endnotes
+foottoend
+\end_modules
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "Документация по системе генерации протоколов “TeXReport” в LaTeX-формате"
+\pdf_author "Kolan Sh, InSys Ltd, Moscow"
+\pdf_subject "TeXReport"
+\pdf_keywords "tex,lyx,latex,texreport,texparser"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 1.5cm
+\rightmargin 1cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Краткое введение в Git
+\end_layout
+
+\begin_layout Author
+Working horsy
+\begin_inset Newline newline
+\end_inset
+
+ InSys Ltd, Moscow
+\end_layout
+
+\begin_layout Date
+February 27, 2013
+\end_layout
+
+\begin_layout Date
+Версия 0.0.1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\lang russian
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Начало работы
+\end_layout
+
+\begin_layout Subsection
+Регистрация в Gitorious
+\end_layout
+
+\begin_layout Subsubsection
+Создание нового пользователя
+\end_layout
+
+\begin_layout Standard
+Для регистрации нужно перейти по ссылке 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://git.insysltd.ru/users/new
+\end_layout
+
+\end_inset
+
+.
+ Будет предложено ввести логин, Email и пароль.
+ Эти данные требуются исключительно для доступа к репозиториям и проектам
+ Gitorious посредством Web-интерфейса.
+ Вместо этих данных возможно использование OpenID (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://ru.wikipedia.org/wiki/OpenID
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Подтверждение регистрации
+\end_layout
+
+\begin_layout Standard
+Для подтверждения вновь созданной учётной записи необходимо обратиться к
+ любому из администраторов ресурса.
+ Данная необходимость обусловлена защитой от несанкционированных регистраций
+ со стороны калифорнийских школьников.
+\end_layout
+
+\begin_layout Subsubsection
+Загрузка OpenSSH-ключа
+\end_layout
+
+\begin_layout Standard
+Данный ключ требуется для защищённой передачи данных между Git-клиентом
+ и Git-сервером.
+\end_layout
+
+\begin_layout Standard
+Сгенерировать пару ключей (приватный/общедоступный) можно посредством команды
+\end_layout
+
+\begin_layout LyX-Code
+ssh-keygen -t rsa
+\end_layout
+
+\begin_layout Standard
+из пакета OpenSSH 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.openssh.org/
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Установочный файл для Windows может быть найден по ссылке 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://sourceforge.net/projects/sshwindows/files/OpenSSH%20for%20Windows%20-%20Re
+lease/
+\end_layout
+
+\end_inset
+
+.
+ Полученный приватный ключ id_rsa следует хранить в безопасном от чужих
+ глаз месте (в случае получения доступа к нему 3-их лиц следует сгенерировать
+ новый, а старый - удалить с Git-сервера).
+\end_layout
+
+\begin_layout Standard
+Загрузка публичного ключа id_rsa.pub выполняется в Web-интерфейсе профиля
+ пользователя Gitorious\SpecialChar \menuseparator
+Dashboard\SpecialChar \menuseparator
+Manage SSH keys\SpecialChar \menuseparator
+Add SSH Key.
+\end_layout
+
+\begin_layout Subsection
+Создание нового репозитория
+\end_layout
+
+\begin_layout Standard
+Если репозиторий добавляется в уже существующий проект, то на вкладке проекта
+ в Web-интерфейсе Gitorious достаточно нажать кнопку Add Repository, ввести
+ имя и описание.
+\end_layout
+
+\begin_layout Standard
+Если требуется создать новый проект, то в Web-интерфейсе Gitorious нужно
+ выбрать Gitorious\SpecialChar \menuseparator
+Projects\SpecialChar \menuseparator
+Create a new project, ввести обязательные поля
+ Title(имя проекта), Slug(идентификатор, генерируется автоматически), Descriptio
+n(описание).
+ При необходимости могут быть заданы Labels(метки для быстрого поиска),
+ Owner(владелец проекта), License(лицензия), Home URL(домашняя страница
+ проекта), Mailinglist URL(список рассылки), Bugtracker URL(баг-трекер).
+ После нажатия кнопки Create project будет создан новый проект с указанными
+ параметрами и предложено создать в нём первый репозиторий.
+\end_layout
+
+\begin_layout Subsubsection
+Первый коммит
+\end_layout
+
+\begin_layout Standard
+Хорошей практикой считается при создании репозитория включение первым делом
+ в него файла README с пусть даже минимальным описанием того, для чего он
+ создан, какую цель преследует.
+\end_layout
+
+\begin_layout LyX-Code
+echo 
+\begin_inset Quotes eld
+\end_inset
+
+This is my project for tests.
+\begin_inset Quotes erd
+\end_inset
+
+ > README
+\end_layout
+
+\begin_layout LyX-Code
+git add README
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+Initial commit.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Здесь мы создали файл с именем README;
+\end_layout
+
+\begin_layout Itemize
+Добавили этот файл в индекс Git для включения его в ближайший коммит;
+\end_layout
+
+\begin_layout Itemize
+Сделали коммит 
+\begin_inset Quotes eld
+\end_inset
+
+Initial commit.
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Индексом в Git называется промежуточное хранилище изменений, попадающих
+ в ближайший коммит.
+ Таким образом, Git даёт возможность избирательно включать те или иные изменения
+ вплоть до отдельных частей файла.
+ Пример:
+\end_layout
+
+\begin_layout LyX-Code
+git add -p git-tutorial.lyx                                             
+                                                                       
+                                                                       
+                                  (git)-[git-tutorial]  diff --git a/git-tutoria
+l.lyx b/git-tutorial.lyx
+\end_layout
+
+\begin_layout LyX-Code
+index 8c6fa34..3aaafde 100644
+\end_layout
+
+\begin_layout LyX-Code
+--- a/git-tutorial.lyx
+\end_layout
+
+\begin_layout LyX-Code
++++ b/git-tutorial.lyx
+\end_layout
+
+\begin_layout LyX-Code
+@@ -365,7 +365,10 @@ Initial commit.
+\end_layout
+
+\begin_layout LyX-Code
+
+\backslash
+end_layout    
+\backslash
+begin_layout Standard -В качестве
+\end_layout
+
+\begin_layout LyX-Code
++Индексом в Git называется промежуточное хранилище изменений, попадающих
+\end_layout
+
+\begin_layout LyX-Code
++ в ближайший коммит.
+\end_layout
+
+\begin_layout LyX-Code
++ Таким образом, Git даёт возможность избирательно включать те или иные
+ изменения
+\end_layout
+
+\begin_layout LyX-Code
++ вплоть до отдельных частей файла.
+\end_layout
+
+\begin_layout LyX-Code
+
+\backslash
+end_layout
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\backslash
+begin_layout Subsubsection
+\end_layout
+
+\begin_layout LyX-Code
+Stage this hunk [y,n,q,a,d,/,e,?]? y
+\end_layout
+
+\begin_layout Standard
+Параметр -m у команды commit указывает на то, что следующим аргументом команды
+ следует описание коммита, что удобно, когда нужно коммит сделать быстро.
+ Без указания этого параметра откроется окно редактора, куда требуется внести
+ описание изменений.
+\end_layout
+
+\begin_layout Standard
+Также, у команды commit помимо параметра -m можно указывать параметр -a,
+ чтобы в коммит добавились все изменения, в том числе и не включенные в
+ индекс.
+ Таким образом, последовательность команд
+\end_layout
+
+\begin_layout LyX-Code
+vim main.c # editing staged C-file...
+\end_layout
+
+\begin_layout LyX-Code
+vim main.h # editing staged H-file...
+\end_layout
+
+\begin_layout LyX-Code
+git commit -am 
+\begin_inset Quotes eld
+\end_inset
+
+Both source and header files are changed.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+эквивалентна
+\end_layout
+
+\begin_layout LyX-Code
+vim main.c # editing staged C-file...
+\end_layout
+
+\begin_layout LyX-Code
+vim main.h # editing staged H-file...
+\end_layout
+
+\begin_layout LyX-Code
+git add main.c main.h
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+Both source and header files are changed.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Синхронизация с Git-сервером
+\end_layout
+
+\begin_layout Subsubsection
+Добавление удалённого репозитория
+\end_layout
+
+\begin_layout Standard
+Для синхронизации с Git-сервером необходимо его добавить в список remote:
+\end_layout
+
+\begin_layout LyX-Code
+git remote add origin git@git.insysltd.ru:test_project/test_repo.git
+\end_layout
+
+\begin_layout Standard
+origin является удалённым репозиторием по умолчанию при выполнении команд
+ синхронизации и может быть опущен.
+\end_layout
+
+\begin_layout Standard
+Нормальной практикой является добавление нескольких удалённых веток, например:
+\end_layout
+
+\begin_layout LyX-Code
+git remote add origin git@git.insysltd.ru:test_project/test_repo.git
+\end_layout
+
+\begin_layout LyX-Code
+git remote add github git@github.com:test_repo.git
+\end_layout
+
+\begin_layout LyX-Code
+git remote add usb /media/usb_stick/projects/test_repo.git
+\end_layout
+
+\begin_layout Subsubsection
+Принятие изменений, сделанных другими пользователями
+\end_layout
+
+\begin_layout Standard
+В отличие от других систем управления исходным кодом Git работает со слияниями
+ гибче.
+ Поддерживаются так называемые fast-forward слияния (рис.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fast-forward-слияния"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pic/vRdkr.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fast-forward-слияния"
+
+\end_inset
+
+fast-forward слияния
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+При выполнении команды git pull скачиваются удалённые изменения (git fetch)
+ и выполняется слияние (git merge).
+ При указании опции --rebase коммиты из удалённого репозитория займут своё
+ место перед локальными коммитами - теми, которые ещё не были отправлены
+ на Git-сервер.
+\end_layout
+
+\begin_layout LyX-Code
+git pull --rebase
+\end_layout
+
+\begin_layout Standard
+Это даёт возможность пользователям работать, не мешая друг-другу, выполняя
+ при этом коммиты тогда, когда хочется пользователю, а не тогда, когда доступен
+ главный репозиторий.
+\end_layout
+
+\begin_layout Standard
+Иногда более целесообразно указывать, из какой удалённо ветки требуется
+ произвести слияние коммитов:
+\end_layout
+
+\begin_layout LyX-Code
+git pull --rebase origin develop
+\end_layout
+
+\begin_layout Subsubsection
+Слияние веток
+\end_layout
+
+\begin_layout Standard
+Как правило, слияние веток необходимо по завершении той или иной фичи (от
+ англ.
+ feature) или исправления бага (от англ.
+ bug).
+ Приведём возможный сценарий для реализации некоторой возможности featureA.
+\end_layout
+
+\begin_layout LyX-Code
+git checkout -b featureA develop # ответвление featureA от develop
+\end_layout
+
+\begin_layout LyX-Code
+...
+ edit ...
+ commit ...
+\end_layout
+
+\begin_layout LyX-Code
+...
+ edit ...
+ commit ...
+\end_layout
+
+\begin_layout LyX-Code
+...
+ edit ...
+ commit ...
+\end_layout
+
+\begin_layout LyX-Code
+git reset --soft develop # вместо develop может быть хеш коммита
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+Feature A implemented.
+\begin_inset Quotes erd
+\end_inset
+
+ # получение из нескольких коммитов одного
+\end_layout
+
+\begin_layout LyX-Code
+git checkout develop # возврат в ветку разработки develop
+\end_layout
+
+\begin_layout LyX-Code
+git merge --no-ff featureA # слияние без --no-ff, если предпочитаете линейную
+ историю
+\end_layout
+
+\begin_layout LyX-Code
+git branch -d featureA # удаление 
+\begin_inset Quotes eld
+\end_inset
+
+слитой
+\begin_inset Quotes erd
+\end_inset
+
+ ветки featureA
+\end_layout
+
+\begin_layout Standard
+Также возможно слияние изменений без создания нового коммита (следует отметить,
+ что хеш последнего коммита всё-равно изменится, а с ним изменится и история)
+ посредством команды:
+\end_layout
+
+\begin_layout LyX-Code
+git merge --squash
+\end_layout
+
+\begin_layout Subsubsection
+Отправка изменений на сервер
+\end_layout
+
+\begin_layout Standard
+Для отправки локальных изменений из текущей ветки в репозиторий по умолчанию
+ (origin) необходимо выполнить команду
+\end_layout
+
+\begin_layout LyX-Code
+git push
+\end_layout
+
+\begin_layout Standard
+Также возможны более сложные операции, к примеру:
+\end_layout
+
+\begin_layout LyX-Code
+git push github # отправит изменения всех веток, которые есть в локальном
+\end_layout
+
+\begin_layout LyX-Code
+                # и удалённом (в данном случае GitHub) репозиториях
+\end_layout
+
+\begin_layout LyX-Code
+git push origin featureA # отправит в origin изменения в ветке featureA
+\end_layout
+
+\begin_layout LyX-Code
+git push origin localA:featureA # отправит в origin изменения локальной
+\end_layout
+
+\begin_layout LyX-Code
+                                # ветки localA в удалённую featureA
+\end_layout
+
+\begin_layout LyX-Code
+git push origin master develop featureB # отправит 3 указанные ветки
+\end_layout
+
+\begin_layout LyX-Code
+git push origin :featureC # удалит в удалённом репозитории ветку featureC
+\end_layout
+
+\begin_layout LyX-Code
+git push origin :v1.0.3 # удалит в origin тег v1.0.3
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout Subsubsection
+Права доступа в Gitorious
+\end_layout
+
+\begin_layout Standard
+В Web-интерфейсе Gitorious на вкладке управления проектом есть кнопка Manage
+ Access\SpecialChar \menuseparator
+Make private, позволяющая сделать репозиторий 
+\begin_inset Quotes eld
+\end_inset
+
+закрытым от посторонних глаз
+\begin_inset Quotes erd
+\end_inset
+
+ и разрешить выборочный доступ на чтение для отдельных лиц или групп.
+ В этом случае все репозитории, входящие в данный проект также становятся
+ недоступными всем лицам, кроме одобренных одним из владельцев проекта/репозитор
+ия.
+\end_layout
+
+\begin_layout Standard
+Для репозитория, как и для проекта, также возможна установка разрешений.
+ Для этого есть кнопка Manage Read Access\SpecialChar \menuseparator
+Make private.
+\end_layout
+
+\begin_layout Standard
+Для возможности внесения изменений в репозиторий несколькими разработчиками
+ требуется добавить этих разработчиков/группы в список разрешения Manage
+ collaborators\SpecialChar \menuseparator
+Add collaborators и установить для добавленных пользователей/групп
+ их разрешения: Review, Commit, Administer.
+\end_layout
+
+\begin_layout Subsection
+Работа с чужим репозиторием, pull-requests
+\end_layout
+
+\begin_layout Standard
+Политика распределённого хранилища подразумевает возможность независимой
+ работы с клонами без вмешательства в репозитории других пользователей.
+\end_layout
+
+\begin_layout Standard
+Как правило, у отдельно взятого репозитория имеется один или несколько коммитеро
+в, которым разрешён полный доступ и на ком лежит ответственность за поддержание
+ данного репозитория в рабочем состоянии.
+ Все остальные, кто имеет доступ на чтение данного репозитория реализуют
+ фичи (feature) в своих клонах.
+ По завершении работы над фичей отправляется pull-request разработчику основного
+ репозитория, который осуществляет слияние, когда у него есть на то свободное
+ время.
+ Таким образом разработчики делают каждый свою работу, не мешая друг другу.
+\end_layout
+
+\begin_layout Standard
+Приведём пример такой работы.
+\end_layout
+
+\begin_layout Subsubsection
+Получение информации о репозитории
+\end_layout
+
+\begin_layout Standard
+Общая информация о репозитории может быть получена уже из Web-интерфейса
+ Gitorious, включая ветки, список коммитов, граф коммитов, pull-реквесты
+ и т.п.
+\end_layout
+
+\begin_layout Subsubsection
+Клонирование
+\end_layout
+
+\begin_layout Standard
+Более подробная информация, включая поиск по коммитам возможна после клонировани
+я репозитория.
+ Если Вы не хотите отвлекать от работы владельца репозитория, но при этом
+ хотите коммитить, будет удобно сделать удалённый клон в Gitorious (кнопка
+ Clone repository у любого проекта в Web-интерфейсе).
+ Будет предложено ввести имя клона, которое будет уже заполнено по умолчанию
+ (в начало), так что его можно не менять.
+\end_layout
+
+\begin_layout Standard
+Далее выполняется стандартная процедура клонирования удалённого клона на
+ локальный диск:
+\end_layout
+
+\begin_layout LyX-Code
+git clone git@git.insysltd.ru:~user1/test_project/user1-test_repo.git
+\end_layout
+
+\begin_layout Subsubsection
+pull-request
+\end_layout
+
+\begin_layout Standard
+По завершении работы (реализации фичи или устранения бага) нужно залить
+ в свой удалённый клон, при необходимости, обновив его (git pull --rebase)
+ из исходного репозитория.
+\end_layout
+
+\begin_layout Standard
+Далее в Web-интерфейсе клона нажать кнопку Request merge, добавить описание
+ pull-запроса, указать исходный репозиторий и ветки.
+ Ваш запрос на слияние появится в списке входящих сообщений пользователя,
+ владеющего оригиналом репозитория.
+\end_layout
+
+\begin_layout Section
+Удобство в работе
+\end_layout
+
+\begin_layout Subsection
+Индекс, откат, временное хранилище
+\end_layout
+
+\begin_layout Standard
+В Git имеются команды, делающие работу более удобной.
+ Так, в частности, можно спрятать все незакомиченные изменения рабочей директори
+и и достать их в любой момент обратно:
+\end_layout
+
+\begin_layout LyX-Code
+git stash     # спрятать изменения
+\end_layout
+
+\begin_layout LyX-Code
+git stash pop # применить их к рабочей директории
+\end_layout
+
+\begin_layout Standard
+Можно получить любую версию файла посредством команды checkout:
+\end_layout
+
+\begin_layout LyX-Code
+git checkout README # получить README-файл, отменив изменения после последнего
+ коммита
+\end_layout
+
+\begin_layout LyX-Code
+git checkout main.c 3f89a7f # получить main.c из ревизии 3f89a7f
+\end_layout
+
+\begin_layout Standard
+Можно отменить изменения, попавшие в индекс для следующего коммита:
+\end_layout
+
+\begin_layout LyX-Code
+git reset         # очистить индекс
+\end_layout
+
+\begin_layout LyX-Code
+git reset main.h  # убрать из индекса main.h
+\end_layout
+
+\begin_layout Subsection
+Теги и версии
+\end_layout
+
+\begin_layout Standard
+Как правило, теги создаются для определённых версий проекта, но могут и
+ не следовать этому правилу.
+\end_layout
+
+\begin_layout Standard
+В случае создания новой версии проекта, хорошим стилем является обновление
+ записи о версии внутри проекта, например version.h с последющим коммитом.
+\end_layout
+
+\begin_layout Standard
+Приведём типичный пример:
+\end_layout
+
+\begin_layout LyX-Code
+git checkout -b release-1.0.0 develop
+\end_layout
+
+\begin_layout LyX-Code
+vim version.h # update version number
+\end_layout
+
+\begin_layout LyX-Code
+git commit -am 
+\begin_inset Quotes eld
+\end_inset
+
+Bumped version number to 1.0.0
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+git checkout master
+\end_layout
+
+\begin_layout LyX-Code
+git merge --no-ff release-1.0.0
+\end_layout
+
+\begin_layout LyX-Code
+git tag v1.0.0
+\end_layout
+
+\begin_layout LyX-Code
+git checkout develop
+\end_layout
+
+\begin_layout LyX-Code
+git merge --no-ff release-1.0.0
+\end_layout
+
+\begin_layout LyX-Code
+git branch -d release-1.0.0
+\end_layout
+
+\begin_layout LyX-Code
+git push origin master develop --tags
+\end_layout
+
+\begin_layout Subsection
+Редактирование истории
+\end_layout
+
+\begin_layout Standard
+Изменение сообщения последнего коммита выполняется командой
+\end_layout
+
+\begin_layout LyX-Code
+git commit --amend
+\end_layout
+
+\begin_layout Standard
+- откроется текстовый редактор, в котором следует отредактировать сообщение
+ последнего коммита.
+\end_layout
+
+\begin_layout Standard
+Для отмены последних нескольких коммитов в текущей ветви требуется выполнить
+ команду
+\end_layout
+
+\begin_layout LyX-Code
+git reset --hard HEAD~3 # отменит последние 3 коммита
+\end_layout
+
+\begin_layout LyX-Code
+git push -f             # и удалит их с центрального репозитория
+\end_layout
+
+\begin_layout Standard
+Для редактирования коммита, совершённого на более ранних этапах следует
+ прибегнуть к команде rebase:
+\end_layout
+
+\begin_layout LyX-Code
+git rebase bbc643cd^ --interactive # редактировать коммит bbc643cd
+\end_layout
+
+\begin_layout LyX-Code
+vim main.c # редактирование main.c
+\end_layout
+
+\begin_layout LyX-Code
+vim main.h # редактирование main.h
+\end_layout
+
+\begin_layout LyX-Code
+git add main.c main.h # добавление main.c and main.h в индекс
+\end_layout
+
+\begin_layout LyX-Code
+git commit --amend # обновление коммита bbc643cd (теперь у него новый хеш)
+\end_layout
+
+\begin_layout LyX-Code
+git rebase --continue # обновить все последующие коммиты в данной ветке
+\end_layout
+
+\begin_layout LyX-Code
+git push -f # отправить изменённую ветвь на Git-сервер
+\end_layout
+
+\begin_layout Subsection
+Пример использования gitflow
+\end_layout
+
+\begin_layout LyX-Code
+# Создание веток master/developer/release/hotfix
+\end_layout
+
+\begin_layout LyX-Code
+$ git flow init
+\end_layout
+
+\begin_layout LyX-Code
+ 
+\end_layout
+
+\begin_layout LyX-Code
+# Начинаем работать над функционалом feature1 (ответвление от develop)
+\end_layout
+
+\begin_layout LyX-Code
+$ git flow feature start feature1
+\end_layout
+
+\begin_layout LyX-Code
+# делаем изменения
+\end_layout
+
+\begin_layout LyX-Code
+$ git add ...изменения...
+\end_layout
+
+\begin_layout LyX-Code
+$ git commit -m "изменения для feature1"
+\end_layout
+
+\begin_layout LyX-Code
+ 
+\end_layout
+
+\begin_layout LyX-Code
+# Эта команда сделает слияние feature1 с develop и удалит ветку
+\end_layout
+
+\begin_layout LyX-Code
+$ git flow feature finish feature1
+\end_layout
+
+\begin_layout LyX-Code
+ 
+\end_layout
+
+\begin_layout LyX-Code
+# Давайте начнём работу над релизом
+\end_layout
+
+\begin_layout LyX-Code
+$ git flow release start release1
+\end_layout
+
+\begin_layout LyX-Code
+# делаем изменения
+\end_layout
+
+\begin_layout LyX-Code
+$ git add ...изменения...
+\end_layout
+
+\begin_layout LyX-Code
+$ git commit -m "release1"
+\end_layout
+
+\begin_layout LyX-Code
+ 
+\end_layout
+
+\begin_layout LyX-Code
+# Эта команда сделает слияние release1 с master
+\end_layout
+
+\begin_layout LyX-Code
+$ git flow release finish release1 
+\end_layout
+
+\begin_layout Section
+Удачная модель ветвления
+\end_layout
+
+\begin_layout Standard
+Материал взят с 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://habrahabr.ru/post/106912/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+В этой статье я представляю модель разработки, которую использую для всех
+ моих проектов (как рабочих, так и частных) уже в течение года, и которая
+ показала себя с хорошей стороны.
+ Я давно собирался написать о ней, но до сих пор не находил свободного времени.
+ Не буду рассказывать обо всех деталях проекта, коснусь лишь стратегии ветвления
+ и управления релизами.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pic/782a1be3.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Удачная-модель-ветвления"
+
+\end_inset
+
+Удачная модель ветвления
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+В качестве инструмента управления версиями всего исходного кода она использует
+ Git.
+\end_layout
+
+\begin_layout Subsection
+Почему Git?
+\end_layout
+
+\begin_layout Standard
+За полноценным обсуждением всех достоинств и недостатков Git в сравнении
+ с централизованными системами контроля версий 
+\begin_inset CommandInset href
+LatexCommand href
+name "обращайтесь"
+target "http://whygitisbetterthanx.com/"
+
+\end_inset
+
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "к всемирной"
+target "http://mercurial.selenic.com/wiki/GitConcepts#Command_equivalence_table"
+
+\end_inset
+
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "сети"
+target "http://git.or.cz/gitwiki/GitSvnComparsion"
+
+\end_inset
+
+.
+ Там Вы найдёте достаточное количество споров на эту тему.
+ Лично же я, как разработчик, на данный момент предпочитаю Git всем остальным
+ инструментам.
+ Git реально смог изменить отношение разработчиков к процессам слияния и
+ ветвления.
+ В классическом мире CVS/Subversion, из которого я пришёл, ветвление и слияние
+ обычно считаются опасными («опасайтесь конфликтов слияния, они больно кусаются!
+»), и потому проводятся как можно реже.
+\end_layout
+
+\begin_layout Standard
+Но с Git эти действия становятся исключительно простыми и дешёвыми, и потому
+ на деле они становятся центральными элементами обычного 
+\shape slanted
+ежедневного
+\shape default
+ рабочего процесса.
+ Просто сравните: в 
+\begin_inset CommandInset href
+LatexCommand href
+name "книгах"
+target "http://svnbook.red-bean.com/"
+
+\end_inset
+
+ по CVS/Subversion ветвление и слияние обычно рассматриваются в последних
+ главах (для продвинутых пользователей), в то время как в 
+\begin_inset CommandInset href
+LatexCommand href
+name "любой"
+target "http://book.git-scm.com/"
+
+\end_inset
+
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "книге"
+target "http://pragprog.com/titles/tsgit/pragmatic-version-control-using-git"
+
+\end_inset
+
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "про Git"
+target "http://github.com/progit/progit"
+
+\end_inset
+
+ они бывают упомянуты уже к третьей главе (основы).
+\end_layout
+
+\begin_layout Standard
+Благодаря своей простоте и предсказуемости, ветвление и слияние больше не
+ являются действиями, которых стоит опасаться.
+ Теперь инструменты управления версиями способны помочь в ветвлении и слиянии
+ больше, чем какие-либо другие.
+\end_layout
+
+\begin_layout Standard
+Но хватит говорить об инструментах, давайте перейдём к модели разработки.
+ Модель, которую я хочу представить, — это, по сути, просто набор процедур,
+ которые исполняет каждый член команды, чтобы все вместе могли достичь высокой
+ управляемости процесса разработки.
+\end_layout
+
+\begin_layout Subsection
+Децентрализованный, но централизованный
+\end_layout
+
+\begin_layout Standard
+Предлагаемая модель ветвления опирается на конфигурацию проекта, содержащую
+ один центральный «истинный» репозиторий.
+ Замечу, что этот репозиторий только 
+\shape slanted
+считается
+\shape default
+ центральным (так как Git является DVCS, у него нет такой вещи, как главный
+ репозиторий, на техническом уровне).
+ Мы будем называть этот репозиторий термином origin, т.к.
+ это имя и так знакомо всем пользователям Git.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pic/1d1e8f1a.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Децентрализованный, но централизованный
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Каждый разработчик забирает и публикует изменения (pull & push) в origin.
+ Но, помимо централизованных отношений push-pull, каждый разработчик также
+ может забирать изменения от остальных коллег внутри своей микро-команды.
+ Например, этот способ может быть удобен в ситуации, когда двое или более
+ разработчиков работают вместе над большой новой фичей, но не могут издать
+ незавершённую работу в origin раньше времени.
+ На картинке выше изображены подгруппы Алисы и Боба, Алисы и Дэвида, Клэр
+ и Дэвида.
+\end_layout
+
+\begin_layout Standard
+Технически это реализуется несложно: Алиса создаёт удалённую ветку Git под
+ названием bob, которая указывает на репозиторий Боба, а Боб делает то же
+ самое с её репозиторием.
+\end_layout
+
+\begin_layout Subsection
+Главные ветви
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement R
+overhang 0in
+width "30col%"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pic/00eb029a.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Главные ветви
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Ядро модели разработки не отличается от большинства существующих моделей.
+ Центральный репозиторий содержит две главные ветки, существующие всё время.
+\end_layout
+
+\begin_layout Itemize
+master
+\end_layout
+
+\begin_layout Itemize
+develop
+\end_layout
+
+\begin_layout Standard
+Ветвь master создаётся при инициализации репозитория, что должно быть знакомо
+ каждому пользователю Git.
+ Параллельно ей также мы создаём ветку для разработки под названием develop.
+\end_layout
+
+\begin_layout Standard
+Мы считаем ветку origin/master главной.
+ То есть, исходный код в ней должен находиться в состоянии 
+\shape slanted
+production-ready
+\shape default
+ в любой произвольный момент времени.
+\end_layout
+
+\begin_layout Standard
+Ветвь origin/develop мы считаем главной ветвью для разработки.
+ Хранящийся в ней код в любой момент времени должен содержать самые последние
+ изданные изменения, необходимые для следующего релиза.
+ Эту ветку также можно назвать «интеграционной».
+ Она служит источником для сборки автоматических ночных билдов.
+\end_layout
+
+\begin_layout Standard
+Когда исходный код в ветви разработки (develop) достигает стабильного состояния
+ и готов к релизу, все изменения должны быть определённым способом влиты
+ в главную ветвь (master) и помечены тегом с номером релиза.
+ Ниже мы рассмотрим этот процесс в деталях.
+\end_layout
+
+\begin_layout Standard
+Следовательно, каждый раз, когда изменения вливаются в главную ветвь (master),
+ мы 
+\shape slanted
+по определению
+\shape default
+ получаем новый релиз.
+ Мы стараемся относиться к этому правилу очень строго, так что, в принципе,
+ мы могли бы использовать хуки Git, чтобы автоматически собирать наши продукты
+ и выкладывать их на рабочие сервера при каждом коммите в главную ветвь
+ (master).
+\end_layout
+
+\begin_layout Subsection
+Вспомогательные ветви
+\end_layout
+
+\begin_layout Standard
+Помимо главных ветвей master и develop, наша модель разработки содержит
+ некоторое количество типов вспомогательных ветвей, которые используются
+ для распараллеливания разработки между членами команды, для упрощения внедрения
+ нового функционала (features), для подготовки релизов и для быстрого исправлени
+я проблем в производственной версии приложения.
+ В отличие от главный ветвей, эти ветви всегда имеют ограниченный срок жизни.
+ Каждая из них в конечном итоге рано или поздно удаляется.
+\end_layout
+
+\begin_layout Standard
+Мы используем следующие типы ветвей:
+\end_layout
+
+\begin_layout Itemize
+Ветви функциональностей (Feature branches)
+\end_layout
+
+\begin_layout Itemize
+Ветви релизов (Release branches)
+\end_layout
+
+\begin_layout Itemize
+Ветви исправлений (Hotfix branches)
+\end_layout
+
+\begin_layout Standard
+У каждого типа ветвей есть своё специфическое назначение и строгий набор
+ правил, от каких ветвей они могут порождаться, и в какие должны вливаться.
+ Сейчас мы рассмотрим их по очереди.
+\end_layout
+
+\begin_layout Standard
+Конечно же, с технической точки зрения, у этих ветвей нет ничего «специфического
+».
+ Разбиение ветвей на категории существует только с точки зрения того, как
+ они используются.
+ А во всём остальном это старые добрые ветви Git.
+\end_layout
+
+\begin_layout Subsubsection
+Ветви функциональностей (feature branches)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement R
+overhang 0in
+width "30col%"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pic/968a9100.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ветви функциональностей (feature branches)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Могут порождаться от: develop
+\end_layout
+
+\begin_layout Standard
+Должны вливаться в: develop
+\end_layout
+
+\begin_layout Standard
+Соглашение о наименовании: всё, за исключением master, develop, release-*
+ или hotfix-*
+\end_layout
+
+\begin_layout Standard
+Ветви функциональностей (feature branches), также называемые иногда тематическим
+и ветвями (topic branches), используются для разработки новых функций, которые
+ должны появиться в текущем или будущем релизах.
+ При начале работы над функциональностью (фичей) может быть ещё неизвестно,
+ в какой именно релиз она будет добавлена.
+ Смысл существования ветви функциональности (feature branch) состоит в том,
+ что она живёт так долго, сколько продолжается разработка данной функциональност
+и (фичи).
+ Когда работа в ветви завершена, последняя вливается обратно в главную ветвь
+ разработки (что означает, что функциональность будет добавлена в грядущий
+ релиз) или же удаляется (в случае неудачного эксперимента).
+\end_layout
+
+\begin_layout Standard
+Ветви функциональностей (feature branches) обычно существуют в репозиториях
+ разработчиков, но не в главном репозитории (origin).
+\end_layout
+
+\begin_layout Paragraph
+Создание ветви функциональности (feature branch)
+\end_layout
+
+\begin_layout Standard
+При начале работы над новой функциональностью делается ответвление от ветви
+ разработки (develop).
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout -b myfeature develop
+\end_layout
+
+\begin_layout LyX-Code
+Switched to a new branch "myfeature"
+\end_layout
+
+\begin_layout Paragraph
+Добавление завершённой функциональности в develop
+\end_layout
+
+\begin_layout Standard
+Завершённая функциональность (фича) вливается обратно в ветвь разработки
+ (develop) и попадает в следующий релиз.
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout develop
+\end_layout
+
+\begin_layout LyX-Code
+Switched to branch 'develop'
+\end_layout
+
+\begin_layout LyX-Code
+$ git merge --no-ff myfeature
+\end_layout
+
+\begin_layout LyX-Code
+Updating ea1b82a..05e9557
+\end_layout
+
+\begin_layout LyX-Code
+(Отчёт об изменениях)
+\end_layout
+
+\begin_layout LyX-Code
+$ git branch -d myfeature
+\end_layout
+
+\begin_layout LyX-Code
+Deleted branch myfeature (was 05e9557).
+\end_layout
+
+\begin_layout LyX-Code
+$ git push origin develop
+\end_layout
+
+\begin_layout Standard
+Флаг --no-ff вынуждает Git всегда создавать новый объект коммита при слиянии,
+ даже если слияние может быть осуществлено алгоритмом fast-forward.
+ Это позволяет не терять информацию о том, что ветка существовала, и группирует
+ вместе все внесённые изменения.
+ Сравните:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pic/572137b0.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+no-fast-forward VS fast-forward
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Во втором случае невозможно увидеть в истории изменений, какие именно объекты
+ коммитов совместно образуют функциональность, — для этого придётся вручную
+ читать все сообщения в коммитах.
+ Отменить функциональность целиком (т.е., группу коммитов) в таком случае
+ невозможно без головной боли, а с флагом --no-ff это делается элементарно.
+\end_layout
+
+\begin_layout Standard
+Конечно, такой подход создаёт некоторое дополнительное количество (пустых)
+ объектов коммитов, но получаемая выгода более чем оправдывает подобную
+ цену.
+\end_layout
+
+\begin_layout Standard
+К сожалению, я ещё не нашёл, как можно настроить Git так, чтобы --no-ff
+ было поведением по-умолчанию при слияниях.
+ Но этот способ должен быть реализован.
+\end_layout
+
+\begin_layout Subsubsection
+Ветви релизов (release branches)
+\end_layout
+
+\begin_layout Standard
+Могут порождаться от: develop
+\end_layout
+
+\begin_layout Standard
+Должны вливаться в: develop и master
+\end_layout
+
+\begin_layout Standard
+Соглашение о наименовании: release-*
+\end_layout
+
+\begin_layout Standard
+Ветви релизов (release branches) используются для подготовки к выпуску новых
+ версий продукта.
+ Они позволяют расставить финальные точки над i перед выпуском новой версии.
+ Кроме того, в них можно добавлять минорные исправления, а также подготавливать
+ метаданные для очередного релиза (номер версии, дата сборки и т.д.).
+ Когда вся эта работа выносится в ветвь релизов, главная ветвь разработки
+ (develop) очищается для добавления последующих фич (которые войдут в следующий
+ большой релиз).
+\end_layout
+
+\begin_layout Standard
+Новую ветку релиза (release branch) надо порождать в тот момент, когда состояние
+ ветви разработки полностью или почти полностью соответствует требованиям,
+ соответствующим новому релизу.
+ По крайней мере, вся необходимая функциональность, предназначенная к этому
+ релизу, уже влита в ветвь разработки (develop).
+ Функциональность, предназначенная к следующим релизам, может быть и не
+ влита.
+ Даже лучше, если ветки для этих функциональностей подождут, пока текущая
+ ветвь релиза не отпочкуется от ветви разработки (develop).
+\end_layout
+
+\begin_layout Standard
+Очередной релиз получает свой номер версии только в тот момент, когда для
+ него создаётся новая ветвь, но ни в коем случае не раньше.
+ Вплоть до этого момента ветвь разработки содержит изменения для «нового
+ релиза», но пока ветка релиза не отделилась, точно неизвестно, будет ли
+ этот релиз иметь версию 0.3, или 1.0, или какую-то другую.
+ Решение принимается при создании новой ветви релиза и зависит от принятых
+ на проекте правил нумерации версий проекта.
+\end_layout
+
+\begin_layout Paragraph
+Создание ветви релиза (release branch)
+\end_layout
+
+\begin_layout Standard
+Ветвь релиза создаётся из ветви разработки (develop).
+ Пускай, например, текущий изданный релиз имеет версию 1.1.5, а на подходе
+ новый большой релиз, полный изменений.
+ Ветвь разработки (develop) готова к «следующему релизу», и мы решаем, что
+ этот релиз будет иметь версию 1.2 (а не 1.1.6 или 2.0).
+ В таком случае мы создаём новую ветвь и даём ей имя, соответствующее новой
+ версии проекта:
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout -b release-1.2 develop
+\end_layout
+
+\begin_layout LyX-Code
+Switched to a new branch "release-1.2"
+\end_layout
+
+\begin_layout LyX-Code
+$ ./bump-version.sh 1.2
+\end_layout
+
+\begin_layout LyX-Code
+Files modified successfully, version bumped to 1.2.
+\end_layout
+
+\begin_layout LyX-Code
+$ git commit -a -m "Bumped version number to 1.2"
+\end_layout
+
+\begin_layout LyX-Code
+[release-1.2 74d9424] Bumped version number to 1.2
+\end_layout
+
+\begin_layout LyX-Code
+1 files changed, 1 insertions(+), 1 deletions(-)
+\end_layout
+
+\begin_layout Standard
+Мы создали новую ветку, переключились в неё, а затем выставили номер версии
+ (bump version number).
+ В нашем примере bump-version.sh — это вымышленный скрипт, который изменяет
+ некоторые файлы в рабочей копии, записывая в них новую версию.
+ (Разумеется, эти изменения можно внести и вручную; я просто обращаю Ваше
+ внимание на то, что 
+\shape slanted
+некоторые
+\shape default
+ файлы изменяются.) Затем мы делаем коммит с указанием новой версии проекта.
+\end_layout
+
+\begin_layout Standard
+Эта новая ветвь может существовать ещё некоторое время, до тех пор, пока
+ новый релиз окончательно не будет готов к выпуску.
+ В течение этого времени к этой ветви (а не к develop) могут быть добавлены
+ исправления найденных багов.
+ Но добавление крупных новых изменений в эту ветвь строго запрещено.
+ Они всегда должны вливаться в ветвь разработки (develop) и ждать следующего
+ большого релиза.
+\end_layout
+
+\begin_layout Paragraph
+Закрытие ветви релиза
+\end_layout
+
+\begin_layout Standard
+Когда мы решаем, что ветвь релиза (release branch) окончательно готова для
+ выпуска, нужно проделать несколько действий.
+ В первую очередь ветвь релиза вливается в главную ветвь (напоминаю, каждый
+ коммит в master — это 
+\shape slanted
+по определению
+\shape default
+ новый релиз).
+ Далее, этот коммит в master должен быть помечен тегом, чтобы в дальнейшем
+ можно было легко обратиться к любой существовавшей версии продукта.
+ И наконец, изменения, сделанные в ветви релиза (release branch), должны
+ быть добавлены обратно в разработку (ветвь develop), чтобы будущие релизы
+ также содержали внесённые исправления багов.
+\end_layout
+
+\begin_layout Standard
+Первые два шага в Git:
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout master
+\end_layout
+
+\begin_layout LyX-Code
+Switched to branch 'master'
+\end_layout
+
+\begin_layout LyX-Code
+$ git merge --no-ff release-1.2
+\end_layout
+
+\begin_layout LyX-Code
+Merge made by recursive.
+\end_layout
+
+\begin_layout LyX-Code
+(Отчёт об изменениях)
+\end_layout
+
+\begin_layout LyX-Code
+$ git tag -a 1.2
+\end_layout
+
+\begin_layout Standard
+Теперь релиз издан и помечен тегом.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Замечание: 
+\series default
+при желании, Вы также можете использовать флаги -s или -u <ключ>, чтобы
+ криптографически подписать тег.
+\end_layout
+
+\begin_layout Standard
+Чтобы сохранить изменения и в последующих релизах, мы должны влить эти изменения
+ обратно в разработку.
+ Делаем это так:
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout develop
+\end_layout
+
+\begin_layout LyX-Code
+Switched to branch 'develop'
+\end_layout
+
+\begin_layout LyX-Code
+$ git merge --no-ff release-1.2
+\end_layout
+
+\begin_layout LyX-Code
+Merge made by recursive.
+\end_layout
+
+\begin_layout LyX-Code
+(Отчёт об изменениях)
+\end_layout
+
+\begin_layout Standard
+Этот шаг, в принципе, может привести к конфликту слияния (нередко бывает,
+ что к причиной конфликта является изменение номера версии проекта).
+ Если это произошло, исправьте их и издайте коммит.
+\end_layout
+
+\begin_layout Standard
+Теперь мы окончательно разделались с веткой релиза.
+ Можно её удалять, потому что она нам больше не понадобится:
+\end_layout
+
+\begin_layout LyX-Code
+$ git branch -d release-1.2
+\end_layout
+
+\begin_layout LyX-Code
+Deleted branch release-1.2 (was ff452fe).
+\end_layout
+
+\begin_layout Subsubsection
+Ветви исправлений (hotfix branches)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement R
+overhang 0in
+width "44col%"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pic/3f8cbad4.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ветви исправлений (hotfix branches)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Могут порождаться от: master
+\end_layout
+
+\begin_layout Standard
+Должны вливаться в: develop и master
+\end_layout
+
+\begin_layout Standard
+Соглашение о наименовании: hotfix-*
+\end_layout
+
+\begin_layout Standard
+Ветви для исправлений (hotfix branches) весьма похожи на ветви релизов (release
+ branches), так как они тоже используются для подготовки новых выпусков
+ продукта, разве лишь незапланированных.
+ Они порождаются необходимостью немедленно исправить нежелательное поведение
+ производственной версии продукта.
+ Когда в производственной версии находится баг, требующий немедленного исправлен
+ия, из соответствующего данной версии тега главной ветви (master) порождается
+ новая ветвь для работы над исправлением.
+\end_layout
+
+\begin_layout Standard
+Смысл её существования состоит в том, что работа команды над ветвью разработки
+ (develop) может спокойно продолжаться, в то время как кто-то один готовит
+ быстрое исправление производственной версии.
+\end_layout
+
+\begin_layout Paragraph
+Создание ветви исправлений (hotfix branch)
+\end_layout
+
+\begin_layout Standard
+Ветви исправлений (hotfix branches) создаются из главной (master) ветви.
+ Пускай, например, текущий производственный релиз имеет версию 1.2, и в нём
+ (внезапно!) обнаруживается серьёзный баг.
+ А изменения в ветви разработки (develop) ещё недостаточно стабильны, чтобы
+ их издавать в новый релиз.
+ Но мы можем создать новую ветвь исправлений и начать работать над решением
+ проблемы:
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout -b hotfix-1.2.1 master
+\end_layout
+
+\begin_layout LyX-Code
+Switched to a new branch "hotfix-1.2.1"
+\end_layout
+
+\begin_layout LyX-Code
+$ ./bump-version.sh 1.2.1
+\end_layout
+
+\begin_layout LyX-Code
+Files modified successfully, version bumped to 1.2.1.
+\end_layout
+
+\begin_layout LyX-Code
+$ git commit -a -m "Bumped version number to 1.2.1"
+\end_layout
+
+\begin_layout LyX-Code
+[hotfix-1.2.1 41e61bb] Bumped version number to 1.2.1
+\end_layout
+
+\begin_layout LyX-Code
+1 files changed, 1 insertions(+), 1 deletions(-)
+\end_layout
+
+\begin_layout Standard
+Не забывайте обновлять номер версии после создания ветви!
+\end_layout
+
+\begin_layout Standard
+Теперь можно исправлять баг, а изменения издавать хоть одним коммитом, хоть
+ несколькими.
+\end_layout
+
+\begin_layout LyX-Code
+$ git commit -m "Fixed severe production problem"
+\end_layout
+
+\begin_layout LyX-Code
+[hotfix-1.2.1 abbe5d6] Fixed severe production problem
+\end_layout
+
+\begin_layout LyX-Code
+5 files changed, 32 insertions(+), 17 deletions(-)
+\end_layout
+
+\begin_layout Paragraph
+Закрытие ветви исправлений
+\end_layout
+
+\begin_layout Standard
+Когда баг исправлен, изменения надо влить обратно в главную ветвь (master),
+ а также в ветвь разработки (develop), чтобы гарантировать, что это исправление
+ окажется и в следующем релизе.
+ Это очень похоже на то, как закрывается ветвь релиза (release branch).
+\end_layout
+
+\begin_layout Standard
+Прежде всего надо обновить главную ветвь (master) и пометить новую версию
+ тегом.
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout master
+\end_layout
+
+\begin_layout LyX-Code
+Switched to branch 'master'
+\end_layout
+
+\begin_layout LyX-Code
+$ git merge --no-ff hotfix-1.2.1 
+\end_layout
+
+\begin_layout LyX-Code
+Merge made by recursive.
+\end_layout
+
+\begin_layout LyX-Code
+(Отчёт об изменениях)
+\end_layout
+
+\begin_layout LyX-Code
+$ git tag -a 1.2.1
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Замечание:
+\series default
+ при желании, Вы также можете использовать флаги -s или -u <ключ>, чтобы
+ криптографически подписать тэг.
+\end_layout
+
+\begin_layout Standard
+Следующим шагом переносим исправление в ветвь разработки (develop).
+\end_layout
+
+\begin_layout LyX-Code
+$ git checkout develop
+\end_layout
+
+\begin_layout LyX-Code
+Switched to branch 'develop'
+\end_layout
+
+\begin_layout LyX-Code
+$ git merge --no-ff hotfix-1.2.1
+\end_layout
+
+\begin_layout LyX-Code
+Merge made by recursive.
+\end_layout
+
+\begin_layout LyX-Code
+(Отчёт об изменениях)
+\end_layout
+
+\begin_layout Standard
+У этого правила есть одно исключение: 
+\series bold
+если в данный момент существует ветвь релиза (release branch), то ветвь
+ исправления (hotfix branch) должна вливаться в неё, а не в ветвь разработки
+ (develop
+\series default
+).
+ В этом случае исправления войдут в ветвь разработки вместе со всей ветвью
+ релиза, когда та будет закрыта.
+ (Хотя, если работа в develop требует немедленного исправления бага и не
+ может ждать, пока будет завершено издание текущего релиза, Вы всё же можете
+ влить исправления (bugfix) в ветвь разработки (develop), и это будет вполне
+ безопасно).
+\end_layout
+
+\begin_layout Standard
+И наконец, удаляем временную ветвь:
+\end_layout
+
+\begin_layout LyX-Code
+$ git branch -d hotfix-1.2.1
+\end_layout
+
+\begin_layout LyX-Code
+Deleted branch hotfix-1.2.1 (was abbe5d6).
+\end_layout
+
+\begin_layout Subsection
+Заключение
+\end_layout
+
+\begin_layout Standard
+Хотя в этой модели ветвления совершенно нет ничего принципиально нового,
+ «большая картинка», с которой начинается эта статья, зарекомендовала себя
+ в наших проектах с самой лучшей стороны.
+ Она формирует элегантную мысленную модель, которую легко полностью охватить
+ одним взглядом, и которая позволяет сформировать у команды совместное понимание
+ процессов ветвления и слияния, действующих на проекте.
+\end_layout
+
+\begin_layout Standard
+Высококачественная PDF-версия этой картинки свободна для скачивания 
+\begin_inset CommandInset href
+LatexCommand href
+name "здесь"
+target "http://github.com/downloads/nvie/gitflow/Git-branching-model.pdf"
+
+\end_inset
+
+.
+ Распечатайте её и повесьте у себя на стену, чтобы к ней можно было обратиться
+ в любой момент.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\shape slanted
+Прим.
+ переводчика:
+\series default
+ статья не новая, ссылка на оригинал 
+\begin_inset CommandInset href
+LatexCommand href
+name "уже появлялась на хабре"
+target "http://habrahabr.ru/blogs/development_tools/104993/"
+
+\end_inset
+
+.
+ Этот перевод — для тех, кому английский ещё даётся не так легко (а также
+ для моих коллег, среди которых я занимаюсь пропагандой, хехе).
+ Для автоматизации описанных в статье процедур автор создал проект gitflow,
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "который можно найти на github"
+target "http://github.com/nvie/gitflow"
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document
