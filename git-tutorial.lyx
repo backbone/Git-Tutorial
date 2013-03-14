@@ -7,7 +7,12 @@
 \let\stdpart\part
 \renewcommand\part{\newpage\stdpart}
 
-\usepackage{indentfirst}
+\usepackage{indentfirst} % Красная строка
+\sloppy % русские переносы
+
+% содержание и нумерация
+\setcounter{tocdepth}{4} % table of contents depth
+\setcounter{secnumdepth}{4} % numbering depth
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -46,9 +51,9 @@ foottoend
 \paperfontsize default
 \spacing single
 \use_hyperref true
-\pdf_title "Документация по системе генерации протоколов “TeXReport” в LaTeX-формате"
+\pdf_title "Git-tutorial"
 \pdf_author "Kolan Sh, InSys Ltd, Moscow"
-\pdf_subject "TeXReport"
+\pdf_subject "Git"
 \pdf_keywords "tex,lyx,latex,texreport,texparser"
 \pdf_bookmarks true
 \pdf_bookmarksnumbered false
@@ -113,7 +118,7 @@ February 27, 2013
 \end_layout
 
 \begin_layout Date
-Версия 1.0.0
+Версия 1.1.0
 \end_layout
 
 \begin_layout Standard
@@ -294,6 +299,30 @@ n(описание).
  параметрами и предложено создать в нём первый репозиторий.
 \end_layout
 
+\begin_layout Standard
+В Git имеется встроенная справка по всем командам, достаточно набрать
+\end_layout
+
+\begin_layout LyX-Code
+git help command
+\end_layout
+
+\begin_layout Standard
+Для большинства опций имеются их сокращённые аналоги, например,
+\end_layout
+
+\begin_layout LyX-Code
+git rebase -i -p # эквивалентно git rebase --interactive --preserve-merges
+\end_layout
+
+\begin_layout Standard
+и значения по умолчанию:
+\end_layout
+
+\begin_layout LyX-Code
+git log --decorate # эквивалентно git log --decorate=short
+\end_layout
+
 \begin_layout Subsubsection
 Первый коммит
 \end_layout
@@ -361,11 +390,11 @@ Initial commit.
 \end_layout
 
 \begin_layout LyX-Code
-git add -p git-tutorial.lyx                                             
-                                                                       
-                                                                       
-                                  (git)-[git-tutorial]  diff --git a/git-tutoria
-l.lyx b/git-tutorial.lyx
+git add -p git-tutorial.lyx
+\end_layout
+
+\begin_layout LyX-Code
+diff --git a/git-tutorial.lyx b/git-tutorial.lyx
 \end_layout
 
 \begin_layout LyX-Code
@@ -489,6 +518,114 @@ Both source and header files are changed.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Статус текущих 
+\begin_inset Quotes eld
+\end_inset
+
+незакоммиченных
+\begin_inset Quotes erd
+\end_inset
+
+ изменений
+\end_layout
+
+\begin_layout Standard
+Текущее состояние рабочей директории можно посмотреть командой status:
+\end_layout
+
+\begin_layout LyX-Code
+$ git status    # вывести текущие изменения
+\end_layout
+
+\begin_layout LyX-Code
+# On branch #238feature
+\end_layout
+
+\begin_layout LyX-Code
+# Changes not staged for commit:
+\end_layout
+
+\begin_layout LyX-Code
+#   (use "git add <file>..." to update what will be committed)
+\end_layout
+
+\begin_layout LyX-Code
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+\end_layout
+
+\begin_layout LyX-Code
+#
+\end_layout
+
+\begin_layout LyX-Code
+#       modified:   git-tutorial.lyx
+\end_layout
+
+\begin_layout LyX-Code
+#
+\end_layout
+
+\begin_layout LyX-Code
+# Untracked files:
+\end_layout
+
+\begin_layout LyX-Code
+#   (use "git add <file>..." to include in what will be committed)
+\end_layout
+
+\begin_layout LyX-Code
+#
+\end_layout
+
+\begin_layout LyX-Code
+#       #git-tutorial.lyx#
+\end_layout
+
+\begin_layout LyX-Code
+#       git-tutorial.lyx~
+\end_layout
+
+\begin_layout LyX-Code
+#       git-tutorial.pdf
+\end_layout
+
+\begin_layout LyX-Code
+no changes added to commit (use "git add" and/or "git commit -a")
+\end_layout
+
+\begin_layout LyX-Code
+$ git status -s # использовать сокращённую запись
+\end_layout
+
+\begin_layout LyX-Code
+ M git-tutorial.lyx
+\end_layout
+
+\begin_layout LyX-Code
+?? #git-tutorial.lyx#
+\end_layout
+
+\begin_layout LyX-Code
+?? git-tutorial.lyx~
+\end_layout
+
+\begin_layout LyX-Code
+?? git-tutorial.pdf 
+\end_layout
+
+\begin_layout Standard
+Сами изменения можно посмотреть командой diff:
+\end_layout
+
+\begin_layout LyX-Code
+git diff          # вывести изменения рабочей директории
+\end_layout
+
+\begin_layout LyX-Code
+git diff --staged # вывести изменения, добавленные в индекс
 \end_layout
 
 \begin_layout Subsection
@@ -688,6 +825,42 @@ git branch -d featureA # удаление
 \end_layout
 
 \begin_layout Standard
+При работе с системами управления проектами (ChilliProject, Redmine, Trac)
+ по завершении работы с ветвью имеет смысл добавлять в сообщение коммита
+ отметку о решении/закрытии бага/фичи.
+ Система управления проектами автоматически пометит тикет как решённый и
+ свяжет его с указанным коммитом, так что любой может определить какие изменения
+ были внесены для решения конкретной задачи.
+ Пример:
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+Feature A implemented.
+ Closes #238.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+Bug B fixed.
+ Fixes #239.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Также возможно слияние изменений без создания нового коммита (следует отметить,
  что хеш последнего коммита всё-равно изменится, а с ним изменится и история)
  посредством команды:
@@ -695,6 +868,33 @@ git branch -d featureA # удаление
 
 \begin_layout LyX-Code
 git merge --squash
+\end_layout
+
+\begin_layout Standard
+Иногда в списке удалённых веток (git branch -r) остаются несуществующие
+ ссылки в результате того, что кто-то удалил эту ветвь или несколько веток
+ ссылок указывали на одну удалённую ветвь.
+ Обновить список можно командой fetch:
+\end_layout
+
+\begin_layout LyX-Code
+git fetch
+\end_layout
+
+\begin_layout LyX-Code
+git fetch github
+\end_layout
+
+\begin_layout Standard
+или вручную удалить невалидную ссылку:
+\end_layout
+
+\begin_layout LyX-Code
+git branch -d -r origin/invalid_branch
+\end_layout
+
+\begin_layout LyX-Code
+git branch -d -r github/invalid_branch2
 \end_layout
 
 \begin_layout Subsubsection
@@ -844,7 +1044,7 @@ git clone git@git.insysltd.ru:~user1/test_project/user1-test_repo.git
 \end_layout
 
 \begin_layout Subsubsection
-pull-request
+pull-request - запрос на слияние
 \end_layout
 
 \begin_layout Standard
@@ -858,6 +1058,254 @@ pull-request
  pull-запроса, указать исходный репозиторий и ветки.
  Ваш запрос на слияние появится в списке входящих сообщений пользователя,
  владеющего оригиналом репозитория.
+\end_layout
+
+\begin_layout Subsubsection
+format-patch - создание патча
+\end_layout
+
+\begin_layout Standard
+Когда лень делать удалённый клон в Gitorious с pull-request-ом и есть уверенност
+ь, что Ваш патч примут сразу, а не спустя длительное время, когда в основном
+ дереве накопится изменений, конфликтующих с патчем, можно использовать
+ быстрое создание патча:
+\end_layout
+
+\begin_layout LyX-Code
+git checkout -b fix_the_bug master # создаём ответвление от master
+\end_layout
+
+\begin_layout LyX-Code
+...
+ edit ...
+\end_layout
+
+\begin_layout LyX-Code
+git commit -am 
+\begin_inset Quotes eld
+\end_inset
+
+The bug fixed.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+git format-patch master # создать патч, включающий отличия текущей ревизии
+ от ветки master
+\end_layout
+
+\begin_layout Standard
+Далее полученный патч может быть отправлен по email или прямо в окно Jabber-клие
+нта.
+ Можно создать патч и отправить его по email одной командой:
+\end_layout
+
+\begin_layout LyX-Code
+git format-patch master --stdout | mail -s 'Please apply this patch, Leo'
+ leo@matrix.org
+\end_layout
+
+\begin_layout Standard
+Применить полученный патч можно командой apply:
+\end_layout
+
+\begin_layout LyX-Code
+git apply --check the_bug_fixed.patch # тест на конфликты
+\end_layout
+
+\begin_layout LyX-Code
+git apply --stat # применение патча с включением в историю текущей ветви
+\end_layout
+
+\begin_layout LyX-Code
+                 # и выводом статистики изменений
+\end_layout
+
+\begin_layout Subsection
+Анализ истории, сравнение, поиск и фильтрация
+\end_layout
+
+\begin_layout Subsubsection
+Список ветвей
+\end_layout
+
+\begin_layout Standard
+Выводится командой branch
+\end_layout
+
+\begin_layout LyX-Code
+git branch    # список локальных веток
+\end_layout
+
+\begin_layout LyX-Code
+git branch -r # список удалённых веток
+\end_layout
+
+\begin_layout LyX-Code
+git branch -a # список всех веток, включая удалённые
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout Standard
+За более полным списком опций следует обратиться к справке по команде branch
+ (git help branch).
+\end_layout
+
+\begin_layout Subsubsection
+Лог истории
+\end_layout
+
+\begin_layout Standard
+Наболее полную информацию об истории изменений можно получить командой
+\end_layout
+
+\begin_layout LyX-Code
+git log --graph --decorate --stat
+\end_layout
+
+\begin_layout Standard
+- Git выведет графическое изображение дерева истории, включая слияния, подписи
+ и статистику изменений по каждому коммиту, где:
+\end_layout
+
+\begin_layout Itemize
+-
+\begin_inset space \thinspace{}
+\end_inset
+
+-graph -- выводить графическое дерево;
+\end_layout
+
+\begin_layout Itemize
+-
+\begin_inset space \thinspace{}
+\end_inset
+
+-decorate -- выводить у коммитов имена ссылок (ref names), например master,
+ origin/develop;
+\end_layout
+
+\begin_layout Itemize
+-
+\begin_inset space \thinspace{}
+\end_inset
+
+-stat -- печатать статистику по изменениям в каждом файле.
+\end_layout
+
+\begin_layout Standard
+Если нужно вывести лог на определённом временном промежутке, через две точки
+ вводится начало и конец:
+\end_layout
+
+\begin_layout LyX-Code
+git log master..develop
+\end_layout
+
+\begin_layout LyX-Code
+git log f8a32c..3ab98c
+\end_layout
+
+\begin_layout Standard
+Можно исключать из выводимого списка коммиты, входящие в какую-либо ветвь,
+ например следующая команда выведет список коммитов из develop, не вошедшие
+ в master:
+\end_layout
+
+\begin_layout LyX-Code
+git log develop ^master
+\end_layout
+
+\begin_layout Standard
+Более полный список опций описан в руководстве (git help log).
+\end_layout
+
+\begin_layout Subsubsection
+Сравнение ревизий
+\end_layout
+
+\begin_layout Standard
+Сравнение производится командой git diff.
+ Примеры:
+\end_layout
+
+\begin_layout LyX-Code
+git diff          # показать текущие изменения в рабочей директории
+\end_layout
+
+\begin_layout LyX-Code
+git diff --staged # показать текущие изменения в рабочей директории, добавленные
+ в индекс
+\end_layout
+
+\begin_layout LyX-Code
+git diff master..develop main.c # показать разницу main.c между двумя ветвями
+\end_layout
+
+\begin_layout LyX-Code
+git diff 581a32..8f292a --stat  # показать статистику различий между ревизиями
+\end_layout
+
+\begin_layout Subsubsection
+Поиск и фильтрация
+\end_layout
+
+\begin_layout Standard
+Для поиска используется всё та же команда log, но с параметрами:
+\end_layout
+
+\begin_layout LyX-Code
+git log --author=
+\begin_inset Quotes erd
+\end_inset
+
+Vasya Pupkin
+\begin_inset Quotes erd
+\end_inset
+
+      # поиск по автору
+\end_layout
+
+\begin_layout LyX-Code
+git log --author="
+\backslash
+(Adam
+\backslash
+)
+\backslash
+|
+\backslash
+(Jon
+\backslash
+)" # поиск по одному из авторов
+\end_layout
+
+\begin_layout LyX-Code
+git log -Ssome_string --source --all # поиск по строке some_string с выводом
+ ссылок на
+\end_layout
+
+\begin_layout LyX-Code
+                                     # удалённые репозитории, из которых
+ достижима ревизия
+\end_layout
+
+\begin_layout LyX-Code
+git log path/to/file                 # коммиты, затрагивающие данный файл
+\end_layout
+
+\begin_layout LyX-Code
+git log --grep=feature               # коммиты с сообщениями о фичах
+\end_layout
+
+\begin_layout LyX-Code
+
 \end_layout
 
 \begin_layout Section
@@ -875,24 +1323,55 @@ pull-request
 \end_layout
 
 \begin_layout LyX-Code
-git stash     # спрятать изменения
+git stash                   # спрятать изменения
 \end_layout
 
 \begin_layout LyX-Code
-git stash pop # применить их к рабочей директории
+git stash pop               # применить их к рабочей директории и удалить
+ их из stash-списка
+\end_layout
+
+\begin_layout LyX-Code
+git stash --keep-index      # спрятать изменения, не добавленные в индекс
+\end_layout
+
+\begin_layout LyX-Code
+git stash drop              # 
+\begin_inset Quotes eld
+\end_inset
+
+выбросить
+\begin_inset Quotes erd
+\end_inset
+
+ спрятанные изменения
+\end_layout
+
+\begin_layout LyX-Code
+git stash save --keep-index # спрятать изменения, не добавленные в индекс
+\end_layout
+
+\begin_layout LyX-Code
+git stash apply             # применить спрятанные изменения, не удаляя
+ их из stash-списка
 \end_layout
 
 \begin_layout Standard
-Можно получить любую версию файла посредством команды checkout:
+Можно получить любую версию файла или директории посредством команды checkout:
 \end_layout
 
 \begin_layout LyX-Code
-git checkout README # получить README-файл, отменив изменения после последнего
- коммита
+git checkout README         # получить README-файл, отменив изменения после
+ последнего коммита
 \end_layout
 
 \begin_layout LyX-Code
 git checkout main.c 3f89a7f # получить main.c из ревизии 3f89a7f
+\end_layout
+
+\begin_layout LyX-Code
+git checkout .
+              # получить из головы (HEAD) содержимое текущей директории
 \end_layout
 
 \begin_layout Standard
@@ -905,6 +1384,57 @@ git reset         # очистить индекс
 
 \begin_layout LyX-Code
 git reset main.h  # убрать из индекса main.h
+\end_layout
+
+\begin_layout Standard
+Вся история команд работы с Git хранится в локальном списке reflog:
+\end_layout
+
+\begin_layout LyX-Code
+$ git reflog
+\end_layout
+
+\begin_layout LyX-Code
+39b103b HEAD@{2}: commit: Adding feature #238...
+\end_layout
+
+\begin_layout LyX-Code
+8958552 HEAD@{3}: reset: moving to develop
+\end_layout
+
+\begin_layout LyX-Code
+7e3dca9 HEAD@{4}: commit: akt_half_tv3-117vm-00.lyx added.
+\end_layout
+
+\begin_layout LyX-Code
+8958552 HEAD@{5}: reset: moving to develop 
+\end_layout
+
+\begin_layout Standard
+так, что имеется возможность локального восстановления в истории случайно
+ удалённого коммита.
+ Можно, к примеру, откатить голову (HEAD) ветки develop к моменту, когда
+ был добавлен lyx-файл:
+\end_layout
+
+\begin_layout LyX-Code
+git checkout develop
+\end_layout
+
+\begin_layout LyX-Code
+git reset --hard 7e3dca9
+\end_layout
+
+\begin_layout LyX-Code
+git push -f origin develop
+\end_layout
+
+\begin_layout Standard
+или просто получить в рабочей директории прежнее состояние, не изменяя истории:
+\end_layout
+
+\begin_layout LyX-Code
+git checkout 7e3dca9
 \end_layout
 
 \begin_layout Subsection
@@ -977,6 +1507,10 @@ git push origin master develop --tags
 Редактирование истории
 \end_layout
 
+\begin_layout Subsubsection
+Редактирование недавних коммитов
+\end_layout
+
 \begin_layout Standard
 Изменение сообщения последнего коммита выполняется командой
 \end_layout
@@ -1003,13 +1537,23 @@ git reset --hard HEAD~3 # отменит последние 3 коммита
 git push -f             # и удалит их с центрального репозитория
 \end_layout
 
+\begin_layout Subsubsection
+Редактирование коммита в глубинах истории
+\end_layout
+
 \begin_layout Standard
 Для редактирования коммита, совершённого на более ранних этапах следует
  прибегнуть к команде rebase:
 \end_layout
 
 \begin_layout LyX-Code
-git rebase bbc643cd^ --interactive # редактировать коммит bbc643cd
+git rebase bbc643cd^ --interactive --preserve-merges # редактировать коммит
+ bbc643cd
+\end_layout
+
+\begin_layout LyX-Code
+        # --preserve-merges - пытаться сохранять точки слияния во время
+ перестройки истории
 \end_layout
 
 \begin_layout LyX-Code
@@ -1034,6 +1578,205 @@ git rebase --continue # обновить все последующие комм�
 
 \begin_layout LyX-Code
 git push -f # отправить изменённую ветвь на Git-сервер
+\end_layout
+
+\begin_layout Standard
+Также, в некоторых случаях бывает необходимо отредактировать самый первый
+ коммит (root-commit):
+\end_layout
+
+\begin_layout LyX-Code
+git rebase -i -p --root              # редактировать самый первый коммит
+\end_layout
+
+\begin_layout LyX-Code
+mkdir tmp && mv * tmp                # разобьём первый коммит на 2
+\end_layout
+
+\begin_layout LyX-Code
+touch README && git add README       # и добавим README-файл
+\end_layout
+
+\begin_layout LyX-Code
+git commit -am 
+\begin_inset Quotes eld
+\end_inset
+
+Initial commit.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+mv tmp/* .
+ && rmdir tmp && git add .
+ # добавим то, что было прежде 1-ым коммитом
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+2nd commit.
+\begin_inset Quotes erd
+\end_inset
+
+          # во второй коммит.
+\end_layout
+
+\begin_layout Subsubsection
+Выделение поддиректории в отдельный репозиторий
+\end_layout
+
+\begin_layout Standard
+Информация взята со 
+\begin_inset CommandInset href
+LatexCommand href
+name "stackoverflow.com"
+target "http://stackoverflow.com/questions/359424/detach-subdirectory-into-separate-git-repository"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Предположим, имеется репозиторий со структурой директорий
+\end_layout
+
+\begin_layout LyX-Code
+XYZ/
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+.git/
+\end_layout
+
+\begin_layout LyX-Code
+XY1/
+\end_layout
+
+\begin_layout LyX-Code
+ABC/
+\end_layout
+
+\begin_layout LyX-Code
+XY2/
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+и требуется его разбить на 2 репозитория, чтобы истории их не пересекались:
+\end_layout
+
+\begin_layout LyX-Code
+XYZ/
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+.git/
+\end_layout
+
+\begin_layout LyX-Code
+XY1/
+\end_layout
+
+\begin_layout LyX-Code
+XY2/
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+ABC/
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+.git/
+\end_layout
+
+\begin_layout LyX-Code
+ABC/
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Для этого воспользуемся командой filter-branch, изменяющей историю.
+\end_layout
+
+\begin_layout LyX-Code
+git clone XYZ ABC # клонируем XYZ в ABC
+\end_layout
+
+\begin_layout LyX-Code
+for branch in develop master; do git branch -t $branch origin/$branch; done
+ # интересующие
+\end_layout
+
+\begin_layout LyX-Code
+                                                                       
+     # нас ветви
+\end_layout
+
+\begin_layout LyX-Code
+git remote rm origin               # удаляем ссылку на родительский репозиторий,
+\end_layout
+
+\begin_layout LyX-Code
+                                   # чтобы обезопасить себя от изменений
+ в нём
+\end_layout
+
+\begin_layout LyX-Code
+git filter-branch --index-filter "git rm -r -f --cached --ignore-unmatch
+ XY1 XY2" 
+\backslash
+
+\end_layout
+
+\begin_layout LyX-Code
+     --prune-empty --tag-name-filter cat -- --all # удалить из истории дир-рии
+ XY1 и XY2,
+\end_layout
+
+\begin_layout LyX-Code
+                                                  # оставив ABC
+\end_layout
+
+\begin_layout Standard
+Аналогично создаётся репозиторий для XYZ
+\end_layout
+
+\begin_layout LyX-Code
+git clone XYZ XYZ-new && cd XYZ-new
+\end_layout
+
+\begin_layout LyX-Code
+for branch in develop master; do git branch -t $branch origin/$branch; done
+\end_layout
+
+\begin_layout LyX-Code
+git remote rm origin
+\end_layout
+
+\begin_layout LyX-Code
+git filter-branch --index-filter "git rm -r -f --cached --ignore-unmatch
+ ABC" 
+\backslash
+
+\end_layout
+
+\begin_layout LyX-Code
+     --prune-empty --tag-name-filter cat -- --all
+\end_layout
+
+\begin_layout Standard
+По опциям команды filter-branch смотрите документацию (git help filter-branch).
 \end_layout
 
 \begin_layout Subsection
@@ -1120,6 +1863,160 @@ $ git commit -m "release1"
 $ git flow release finish release1 
 \end_layout
 
+\begin_layout Subsection
+Двоичный поиск ошибок
+\end_layout
+
+\begin_layout Standard
+Выполняется командой bisect, пример:
+\end_layout
+
+\begin_layout LyX-Code
+git bisect start
+\end_layout
+
+\begin_layout LyX-Code
+git bisect bad         # текущая ревизия плохая
+\end_layout
+
+\begin_layout LyX-Code
+git bisect good v1.0.3 # в версии 1.0.3 проблема не наблюдалась
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout LyX-Code
+git bisect bad         # пометить текущую ревизию как плохую
+\end_layout
+
+\begin_layout LyX-Code
+git bisect good        # пометить текущую ревизию как хорошую
+\end_layout
+
+\begin_layout LyX-Code
+git bisect skip        # пропустить текущую ревизию
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout LyX-Code
+git bisect reset       # закончить двоичный поиск
+\end_layout
+
+\begin_layout Standard
+Как только bisect нашёл источник ошибки - ревизию, в которой она была внесена,
+ для нахождения ошибки остаётся проанализировать изменения в одном текущем
+ коммите.
+\end_layout
+
+\begin_layout Standard
+Дальнейшие действия зависят от вкусов/стиля разработки:
+\end_layout
+
+\begin_layout Itemize
+ошибка может быть исправлена прямо в текущей ревизии и 
+\begin_inset Quotes eld
+\end_inset
+
+смержена
+\begin_inset Quotes erd
+\end_inset
+
+ в нужные ветви;
+\end_layout
+
+\begin_layout Itemize
+может быть сделано ответвление от ветки develop или исправлено прямо в ней;
+\end_layout
+
+\begin_layout Itemize
+может быть сделан хотфикс (hotfix) ответвлением от master с последующим
+ выпуском новой версии и слиянием исправлений в master и develop.
+\end_layout
+
+\begin_layout Subsection
+cherry-pick - обмен коммитами между ветками
+\end_layout
+
+\begin_layout Standard
+Команда cherry-pick позволяет скопировать определённые коммиты из одной
+ ветки в другую как если бы они были созданы изначально в ней.
+ Например:
+\end_layout
+
+\begin_layout LyX-Code
+git cherry-pick master # скопирует последний коммит из master в текущую
+ ветвь
+\end_layout
+
+\begin_layout LyX-Code
+git cherry-pick ..master          # применить все коммиты из master, отсутствующие
+ в текущей ветке
+\end_layout
+
+\begin_layout LyX-Code
+git cherry-pick master~4 master~2 # скопировать 2 коммита из master
+\end_layout
+
+\begin_layout LyX-Code
+                                  # (3-ий и 4-ый, начиная с головы)
+\end_layout
+
+\begin_layout LyX-Code
+git cherry-pick -n master~1 next  # применить предпоследний из master и
+ последний из next коммиты
+\end_layout
+
+\begin_layout LyX-Code
+                                  # к рабочей директории и индексу, не создавая
+ новой ревизии
+\end_layout
+
+\begin_layout LyX-Code
+git cherry-pick --ff ..next       # если история линейная и HEAD является
+ предшественником master,
+\end_layout
+
+\begin_layout LyX-Code
+                                  # обновить рабочую директорию и переустановить
+ HEAD на последний
+\end_layout
+
+\begin_layout LyX-Code
+                                  # коммит master, в противном случае -
+ скопировать все коммиты
+\end_layout
+
+\begin_layout LyX-Code
+                                  # из master
+\end_layout
+
+\begin_layout LyX-Code
+ git rev-list --reverse master -- README | git cherry-pick -n --stdin #
+ вывести хеши ревизий
+\end_layout
+
+\begin_layout LyX-Code
+          # в master, затрагивающие файл README и применить их одним коммитом
+ к текущей ветви
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+               
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
 \begin_layout Section
 Удачная модель ветвления
 \end_layout
@@ -1159,7 +2056,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename pic/782a1be3.png
-	scale 50
+	scale 80
 
 \end_inset
 
@@ -2200,6 +3097,269 @@ target "http://github.com/nvie/gitflow"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+Рекомендуемая литература
+\end_layout
+
+\begin_layout Enumerate
+Документация на официальном сайте Git (англ.) 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://git-scm.com/documentation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+Пример Git-конфигурации ~/.gitconfig
+\end_layout
+
+\begin_layout Standard
+Приведём пример типичного файла конфигурации.
+ Все опции могут быть вписаны вручную, но могут быть заданы через команду
+ git config, например:
+\end_layout
+
+\begin_layout LyX-Code
+git config --global user.email "you@example.com"
+\end_layout
+
+\begin_layout LyX-Code
+git config --global user.name "Your Name"
+\end_layout
+
+\begin_layout Standard
+Опция --global указывает, что настройки должны быть применены глобально,
+ а не только к текущему репозиторию.
+\end_layout
+
+\begin_layout Standard
+Пример файла конфигурации, расположенного в домашней директории пользователя
+ ~/.gitconfig:
+\end_layout
+
+\begin_layout LyX-Code
+[user]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+email = vasya.pupkin@gmail.com
+\end_layout
+
+\begin_layout LyX-Code
+name = Vasya P
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[color]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+ui = auto
+\end_layout
+
+\begin_layout LyX-Code
+branch = auto
+\end_layout
+
+\begin_layout LyX-Code
+diff = auto
+\end_layout
+
+\begin_layout LyX-Code
+status = auto
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[color "branch"]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+current = yellow reverse
+\end_layout
+
+\begin_layout LyX-Code
+local = yellow
+\end_layout
+
+\begin_layout LyX-Code
+remote = green
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[color "diff"]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+meta = yellow bold
+\end_layout
+
+\begin_layout LyX-Code
+frag = magenta bold
+\end_layout
+
+\begin_layout LyX-Code
+old = red bold
+\end_layout
+
+\begin_layout LyX-Code
+new = green bold
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[color "status"]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+added = yellow
+\end_layout
+
+\begin_layout LyX-Code
+changed = green
+\end_layout
+
+\begin_layout LyX-Code
+untracked = cyan
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[alias]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+unstage = reset HEAD --
+\end_layout
+
+\begin_layout LyX-Code
+st = status
+\end_layout
+
+\begin_layout LyX-Code
+s = status -uno
+\end_layout
+
+\begin_layout LyX-Code
+ci = commit
+\end_layout
+
+\begin_layout LyX-Code
+di = diff -b
+\end_layout
+
+\begin_layout LyX-Code
+co = checkout
+\end_layout
+
+\begin_layout LyX-Code
+up = checkout
+\end_layout
+
+\begin_layout LyX-Code
+update = checkout
+\end_layout
+
+\begin_layout LyX-Code
+l = log
+\end_layout
+
+\begin_layout LyX-Code
+hgrevert = checkout
+\end_layout
+
+\begin_layout LyX-Code
+strip = reset --hard
+\end_layout
+
+\begin_layout LyX-Code
+branches = branch -a
+\end_layout
+
+\begin_layout LyX-Code
+pull = fetch
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[instaweb]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+local = true
+\end_layout
+
+\begin_layout LyX-Code
+httpd = lighttpd -f
+\end_layout
+
+\begin_layout LyX-Code
+port = 4321
+\end_layout
+
+\begin_layout LyX-Code
+browser = firefox
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[merge]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+tool = vimdiff
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[core]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+quotepath = false
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+[push]
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+default = matching
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
 \end_layout
 
 \end_body
