@@ -1043,6 +1043,15 @@ Add collaborators и установить для добавленных поль
 git clone git@git.insysltd.ru:~user1/test_project/user1-test_repo.git
 \end_layout
 
+\begin_layout Standard
+Если репозиторий содержит субрепозитории (submodules) необходимо их инициализиро
+вать и синхронизировать:
+\end_layout
+
+\begin_layout LyX-Code
+git submodule update --init --recursive
+\end_layout
+
 \begin_layout Subsubsection
 pull-request - запрос на слияние
 \end_layout
@@ -2005,15 +2014,91 @@ git cherry-pick --ff ..next       # если история линейная и 
  к текущей ветви
 \end_layout
 
+\begin_layout Subsection
+Субрепозитории
+\end_layout
+
+\begin_layout Standard
+Или так называемые Git submodules.
+ Применяются для включения одних проектов в другие или для создания суперпроекто
+в.
+ При этом обновления в подпроектах не затрагивают основной проект до тех
+ пор, пока владелец проекта не захочет это сделать явно, убедившись, что
+ эти изменения оставляют проект в рабочем состоянии.
+\end_layout
+
+\begin_layout Standard
+Создать Git submodule очень просто, например добавим в некоторый проект
+ my-project библиотеку my-lib:
+\end_layout
+
 \begin_layout LyX-Code
+cd my-project
+\end_layout
+
+\begin_layout LyX-Code
+git submodule add git@git.github.com:mynickname/my-lib.git
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+Added my-lib submodule.
+\begin_inset Quotes erd
+\end_inset
+
 
 \end_layout
 
 \begin_layout LyX-Code
-               
+git push
+\end_layout
+
+\begin_layout Standard
+Команда
 \end_layout
 
 \begin_layout LyX-Code
+          git submodule update --init --recursive     
+\end_layout
+
+\begin_layout Standard
+рекурсивно обновляет всем субмодули, которые в свою очередь могут содержать
+ другие субмодули из origin remote.
+ Следует отметить, что после выполнения данной команды сурепозитории могут
+ оказаться в 
+\begin_inset Quotes eld
+\end_inset
+
+detached state
+\begin_inset Quotes erd
+\end_inset
+
+, то есть не привязанными к какой-либо ветке.
+\end_layout
+
+\begin_layout Standard
+Если требуется внести изменения в субрепозиторий, то это делается как и
+ с обычным проектом (edit, commit, push).
+ Важно отметить, что изменения в субрепозитории не влияют на главный репозиторий
+ до тех пор, пока в нём это явно не будет указано:
+\end_layout
+
+\begin_layout LyX-Code
+git add my-lib
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+my-lib submodule updated.
+\begin_inset Quotes erd
+\end_inset
+
 
 \end_layout
 
