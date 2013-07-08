@@ -1636,6 +1636,22 @@ git commit -m
           # во второй коммит.
 \end_layout
 
+\begin_layout Standard
+Объединение нескольких коммитов в один можно выполнить ещё проще:
+\end_layout
+
+\begin_layout LyX-Code
+git rebase -i -p HEAD~5
+\end_layout
+
+\begin_layout LyX-Code
+# редактирование: заменить 'pick' на 'squash' для коммитов,
+\end_layout
+
+\begin_layout LyX-Code
+#                 которые хотим объединить, сохранить.
+\end_layout
+
 \begin_layout Subsubsection
 Выделение поддиректории в отдельный репозиторий
 \end_layout
