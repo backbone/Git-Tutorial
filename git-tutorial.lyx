@@ -2102,6 +2102,28 @@ my-lib submodule updated.
 
 \end_layout
 
+\begin_layout Subsection
+Свободное место на диске
+\end_layout
+
+\begin_layout Standard
+Для удаления временных файлов и сжатия истории можно использовать следующие
+ команды:
+\end_layout
+
+\begin_layout LyX-Code
+git clean # удалить неотслеживаемые файлы в репозитории
+\end_layout
+
+\begin_layout LyX-Code
+git prune # удалить все недостижимые объекты/коммиты из базы данных
+\end_layout
+
+\begin_layout LyX-Code
+git gc --aggressive --prune # удалить все бесполезные объекты и оптимизировать
+ локальный репозиторий
+\end_layout
+
 \begin_layout Section
 Удачная модель ветвления
 \end_layout
