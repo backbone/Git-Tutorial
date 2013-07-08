@@ -1652,6 +1652,51 @@ git rebase -i -p HEAD~5
 #                 которые хотим объединить, сохранить.
 \end_layout
 
+\begin_layout Standard
+Разбить произвольный коммит на два последовательных коммита можно следующими
+ командами:
+\end_layout
+
+\begin_layout LyX-Code
+git rebase -i <commit-to-split>^ branch_name
+\end_layout
+
+\begin_layout LyX-Code
+git rebase HEAD^
+\end_layout
+
+\begin_layout LyX-Code
+git add -p                   # add changes for the 1th commit
+\end_layout
+
+\begin_layout LyX-Code
+git commit -m 
+\begin_inset Quotes eld
+\end_inset
+
+1st commit
+\begin_inset Quotes erd
+\end_inset
+
+   # make 1st commit
+\end_layout
+
+\begin_layout LyX-Code
+git commit -am 
+\begin_inset Quotes eld
+\end_inset
+
+2nd commit
+\begin_inset Quotes erd
+\end_inset
+
+  # make 2nd commit
+\end_layout
+
+\begin_layout LyX-Code
+git rebase --continue        # complete rebase operation
+\end_layout
+
 \begin_layout Subsubsection
 Выделение поддиректории в отдельный репозиторий
 \end_layout
