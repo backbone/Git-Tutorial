@@ -1876,10 +1876,6 @@ git reset --soft HEAD~1 # удалить последний коммит, сох
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
 Удаление коммита из глубин истории не всегда может быть выполнено успешно,
  может потребоваться разрешение конфликтов.
 \end_layout
@@ -1908,6 +1904,48 @@ git reset --hard HEAD~1 # удалить требуемый коммит
 \begin_layout LyX-Code
 git rebase --continue # продолжить перепостроение истории, начиная с удалённого
  коммита
+\end_layout
+
+\begin_layout Subsubsection
+Синхронизация веток
+\end_layout
+
+\begin_layout Standard
+По аналогии с командой git pull --rebase для принятия удалённых изменений
+ с перемещением локальных коммитов на вершину истории синхронизация веток
+ может осуществляться и локально.
+\end_layout
+
+\begin_layout LyX-Code
+# Синхронизировать текущую ветку с веткой branch1, переместив коммиты,
+\end_layout
+
+\begin_layout LyX-Code
+# отсутствующие в branch1 на вершину истории
+\end_layout
+
+\begin_layout LyX-Code
+git rebase branch1
+\end_layout
+
+\begin_layout LyX-Code
+ 
+\end_layout
+
+\begin_layout LyX-Code
+# Синхронизировать текущую ветку с удалённой, переместив коммиты,
+\end_layout
+
+\begin_layout LyX-Code
+# отсутствующие в origin/master на вершину истории
+\end_layout
+
+\begin_layout LyX-Code
+git fetch origin master
+\end_layout
+
+\begin_layout LyX-Code
+git rebase origin/master
 \end_layout
 
 \begin_layout Subsection
