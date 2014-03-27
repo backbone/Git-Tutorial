@@ -1849,6 +1849,67 @@ git filter-branch --index-filter "git rm -r -f --cached --ignore-unmatch
 По опциям команды filter-branch смотрите документацию (git help filter-branch).
 \end_layout
 
+\begin_layout Subsubsection
+Удаление коммита из истории
+\end_layout
+
+\begin_layout Standard
+Удаление последнего созданного коммита осуществляется одной командой и всегда
+ завершается успехом.
+\end_layout
+
+\begin_layout LyX-Code
+git reset --hard HEAD~1 # удалить последний коммит
+\end_layout
+
+\begin_layout LyX-Code
+git reset --soft HEAD~1 # удалить последний коммит, сохранив изменения в
+ 
+\begin_inset Quotes eld
+\end_inset
+
+незакомиченными
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+Удаление коммита из глубин истории не всегда может быть выполнено успешно,
+ может потребоваться разрешение конфликтов.
+\end_layout
+
+\begin_layout LyX-Code
+git rebase -i --preserve-merges HEAD~10 # редактировать последние 10 коммитов,
+ сохраняя слияния
+\end_layout
+
+\begin_layout LyX-Code
+# В редакторе отметить удаляемый коммит для редактирования 
+\begin_inset Quotes eld
+\end_inset
+
+edit
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+git reset --hard HEAD~1 # удалить требуемый коммит
+\end_layout
+
+\begin_layout LyX-Code
+git rebase --continue # продолжить перепостроение истории, начиная с удалённого
+ коммита
+\end_layout
+
 \begin_layout Subsection
 Пример использования gitflow
 \end_layout
