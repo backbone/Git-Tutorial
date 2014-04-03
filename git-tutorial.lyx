@@ -1021,6 +1021,62 @@ Add collaborators и установить для добавленных поль
 \end_layout
 
 \begin_layout Subsubsection
+Авторство и время редактирования строк
+\end_layout
+
+\begin_layout Standard
+Следующий пример покажет авторство, ревизии последних правок и время для
+ нескольких строк в файле исходного кода main.c:
+\end_layout
+
+\begin_layout LyX-Code
+git blame -L 40,60 main.c   # вывести информацию о строках с 40 по 60 включительн
+о
+\end_layout
+
+\begin_layout LyX-Code
+git blame -L 40,+21 main.c  # вывести информацию о 21-ой строке, начиная
+ с 40-ой
+\end_layout
+
+\begin_layout Standard
+Если требуется отфильтровать слишком старую историю, можно это сделать следующим
+ образом:
+\end_layout
+
+\begin_layout LyX-Code
+git blame v2.6.18..
+ -- main.c        # игнорировать информацию, старше версии 2.6.18
+\end_layout
+
+\begin_layout LyX-Code
+git blame --since=3.weeks -- main.c  # игнорировать информацию, старше 3-х
+ недель
+\end_layout
+
+\begin_layout Standard
+Вот пример, как можно посчитать общий вклад разработчиков в конкретный файл
+ проекта:
+\end_layout
+
+\begin_layout LyX-Code
+git blame --line-porcelain mainform.cpp | sed -n 's/^author //p' | sort |
+ uniq -c | sort -rn
+\end_layout
+
+\begin_layout LyX-Code
+   1526 Kolan Sh
+\end_layout
+
+\begin_layout LyX-Code
+    691 egor_i@egor-837.insysltd.ru
+\end_layout
+
+\begin_layout LyX-Code
+    167 egor_i@EGOR-837 
+\end_layout
+
+\begin_layout Subsubsection
 Клонирование
 \end_layout
 
