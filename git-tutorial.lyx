@@ -2383,6 +2383,77 @@ git archive -o myproject-doc.zip HEAD:Documentation/ # создать архив
 ией
 \end_layout
 
+\begin_layout Subsection
+Проверка целостности репозитория
+\end_layout
+
+\begin_layout Standard
+Git являет по своей сути файловую систему, расположенную внутри другой файловой
+ системы (на диске).
+ Иногда в работе компьютера случаются сбои и файловая система компьютера
+ может быть повреждена.
+ Также существует ненулевая вероятность повреждения системы объектов репозитория
+ в результате типовой работы (напр., использование нестабильной версии Git),
+ хотя она крайне мала.
+\end_layout
+
+\begin_layout Standard
+Для проверки целостности объектов бд и истории репозитория имеется команда
+ 
+\begin_inset Quotes eld
+\end_inset
+
+git fsck
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Примеры использования:
+\end_layout
+
+\begin_layout LyX-Code
+git fsck # выполнить проверку
+\end_layout
+
+\begin_layout Standard
+Иногда случается, что объект добавлен в индекс 
+\begin_inset Quotes eld
+\end_inset
+
+git add
+\begin_inset Quotes erd
+\end_inset
+
+, а впоследствии удалён по ошибке, например командой 
+\begin_inset Quotes eld
+\end_inset
+
+git reset --hard
+\begin_inset Quotes erd
+\end_inset
+
+.
+ В Git предусмотрена возможность восстановления данных и на этот случай,
+ пример:
+\end_layout
+
+\begin_layout LyX-Code
+git add main.c        # добавили изменения в индекс
+\end_layout
+
+\begin_layout LyX-Code
+git reset --hard      # случайно откатились к вершине истории
+\end_layout
+
+\begin_layout LyX-Code
+git fsck --lost-found # с большой долей вероятности изменённый main.c находится
+\end_layout
+
+\begin_layout LyX-Code
+                      # в .git/lost-found/other, только в место имени хеш
+ ревизии
+\end_layout
+
 \begin_layout Section
 Удачная модель ветвления
 \end_layout
