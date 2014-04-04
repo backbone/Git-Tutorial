@@ -2234,6 +2234,10 @@ git cherry-pick --ff ..next       # если история линейная и 
 Субрепозитории
 \end_layout
 
+\begin_layout Subsubsection
+Субмодули
+\end_layout
+
 \begin_layout Standard
 Или так называемые Git submodules.
  Применяются для включения одних проектов в другие или для создания суперпроекто
@@ -2316,6 +2320,93 @@ my-lib submodule updated.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Поддеревья
+\end_layout
+
+\begin_layout Standard
+Или так называемые Git subtrees.
+\end_layout
+
+\begin_layout Standard
+Вначале нужно добавить репозиторий, который будет использоваться как subtree:
+\end_layout
+
+\begin_layout LyX-Code
+git remote add mylib_remote git@git.insysltd.ru:insys/mylib.git
+\end_layout
+
+\begin_layout LyX-Code
+git fetch mylib_remote
+\end_layout
+
+\begin_layout LyX-Code
+git checkout -b mylib_branch mylib_remote/master
+\end_layout
+
+\begin_layout LyX-Code
+git checkout master
+\end_layout
+
+\begin_layout Standard
+Допустим, мы хотим поместить проект mylib в подкаталог с тем же именем:
+\end_layout
+
+\begin_layout LyX-Code
+git read-tree --prefix=mylib/ -u mylib_branch
+\end_layout
+
+\begin_layout Standard
+В отличие от субмодулей данные поддерева хранятся физически в репозитории.
+ Субмодули же, по своей сути, лишь ссылаются на данные в другом репозитории.
+\end_layout
+
+\begin_layout Standard
+Обновление поддерева происходит довольно легко:
+\end_layout
+
+\begin_layout LyX-Code
+git checkout mylib_branch # переключиться на ветку поддерева
+\end_layout
+
+\begin_layout LyX-Code
+git pull                  # принять удалённые изменения
+\end_layout
+
+\begin_layout LyX-Code
+git checkout master       # переключиться на версию основного проекта
+\end_layout
+
+\begin_layout LyX-Code
+git merge --squash -s subtree --no-commit mylib_branch # смержить в mylib/,
+ не создавая коммита
+\end_layout
+
+\begin_layout LyX-Code
+git commit   # зафиксировать изменения
+\end_layout
+
+\begin_layout Standard
+Узнать о наличии разницы между подкаталогом mylib/ и кодом в mylib_branch
+ можно при помощи 
+\begin_inset Quotes eld
+\end_inset
+
+git diff-tree
+\begin_inset Quotes erd
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+git diff-tree -p mylib_branch        # сравнить с локальной веткой
+\end_layout
+
+\begin_layout LyX-Code
+git diff-tree -p mylib_remote/master # сравнить с удалённой веткой
 \end_layout
 
 \begin_layout Section
