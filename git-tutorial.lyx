@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
@@ -36,13 +36,13 @@ foottoend
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -66,15 +66,24 @@ foottoend
 \pdf_pdfusetitle true
 \papersize default
 \use_geometry true
-\use_amsmath 1
-\use_esint 1
-\use_mhchem 1
-\use_mathdots 1
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -118,7 +127,7 @@ February 27, 2013
 \end_layout
 
 \begin_layout Date
-Версия 1.3.0
+Версия 1.3.1
 \end_layout
 
 \begin_layout Standard
@@ -264,7 +273,7 @@ lease/
 .
  Полученный приватный ключ id_rsa следует хранить в безопасном от чужих
  глаз месте (в случае получения доступа к нему 3-их лиц следует сгенерировать
- новый, а старый - удалить с Git-сервера).
+ новый, а старый публичный ключ (.pub) - удалить с Git-сервера).
 \end_layout
 
 \begin_layout Standard
@@ -382,6 +391,13 @@ Initial commit.
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Индексом в Git называется промежуточное хранилище изменений, попадающих
  в ближайший коммит.
  Таким образом, Git даёт возможность избирательно включать те или иные изменения
@@ -456,6 +472,13 @@ begin_layout Subsubsection
 
 \begin_layout LyX-Code
 Stage this hunk [y,n,q,a,d,/,e,?]? y
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -617,6 +640,13 @@ $ git status -s # использовать сокращённую запись
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Сами изменения можно посмотреть командой diff:
 \end_layout
 
@@ -700,7 +730,7 @@ status collapsed
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 \begin_inset CommandInset label
@@ -825,6 +855,13 @@ git branch -d featureA # удаление
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 При работе с системами управления проектами (ChilliProject, Redmine, Trac)
  по завершении работы с ветвью имеет смысл добавлять в сообщение коммита
  отметку о решении/закрытии бага/фичи.
@@ -861,6 +898,13 @@ Bug B fixed.
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Также возможно слияние изменений без создания нового коммита (следует отметить,
  что хеш последнего коммита всё-равно изменится, а с ним изменится и история)
  посредством команды:
@@ -868,6 +912,13 @@ Bug B fixed.
 
 \begin_layout LyX-Code
 git merge --squash
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -908,6 +959,13 @@ git branch -d -r github/invalid_branch2
 
 \begin_layout LyX-Code
 git push
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1040,6 +1098,13 @@ git blame -L 40,+21 main.c  # вывести информацию о 21-ой с�
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Если требуется отфильтровать слишком старую историю, можно это сделать следующим
  образом:
 \end_layout
@@ -1052,6 +1117,13 @@ git blame v2.6.18..
 \begin_layout LyX-Code
 git blame --since=3.weeks -- main.c  # игнорировать информацию, старше 3-х
  недель
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1097,6 +1169,13 @@ git blame --line-porcelain mainform.cpp | sed -n 's/^author //p' | sort |
 
 \begin_layout LyX-Code
 git clone git@git.insysltd.ru:~user1/test_project/user1-test_repo.git
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1163,6 +1242,13 @@ git format-patch master # создать патч, включающий отли
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Далее полученный патч может быть отправлен по email или прямо в окно Jabber-клие
 нта.
  Можно создать патч и отправить его по email одной командой:
@@ -1171,6 +1257,13 @@ git format-patch master # создать патч, включающий отли
 \begin_layout LyX-Code
 git format-patch master --stdout | mail -s 'Please apply this patch, Leo'
  leo@matrix.org
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1213,7 +1306,10 @@ git branch -r # список удалённых веток
 git branch -a # список всех веток, включая удалённые
 \end_layout
 
-\begin_layout LyX-Code
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
 
 \end_layout
 
@@ -1265,6 +1361,13 @@ git log --graph --decorate --stat
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Если нужно вывести лог на определённом временном промежутке, через две точки
  вводится начало и конец:
 \end_layout
@@ -1278,6 +1381,13 @@ git log f8a32c..3ab98c
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Можно исключать из выводимого списка коммиты, входящие в какую-либо ветвь,
  например следующая команда выведет список коммитов из develop, не вошедшие
  в master:
@@ -1285,6 +1395,13 @@ git log f8a32c..3ab98c
 
 \begin_layout LyX-Code
 git log develop ^master
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1422,6 +1539,13 @@ git stash apply             # применить спрятанные измен
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Можно получить любую версию файла или директории посредством команды checkout:
 \end_layout
 
@@ -1440,6 +1564,13 @@ git checkout .
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Можно отменить изменения, попавшие в индекс для следующего коммита:
 \end_layout
 
@@ -1449,6 +1580,13 @@ git reset         # очистить индекс
 
 \begin_layout LyX-Code
 git reset main.h  # убрать из индекса main.h
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1646,6 +1784,13 @@ git push -f # отправить изменённую ветвь на Git-сер
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Также, в некоторых случаях бывает необходимо отредактировать самый первый
  коммит (root-commit):
 \end_layout
@@ -1693,6 +1838,13 @@ git commit -m
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Объединение нескольких коммитов в один можно выполнить ещё проще:
 \end_layout
 
@@ -1706,6 +1858,13 @@ git rebase -i -p HEAD~5
 
 \begin_layout LyX-Code
 #                 которые хотим объединить, сохранить.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1832,6 +1991,13 @@ ABC/
 
 \end_deeper
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Для этого воспользуемся командой filter-branch, изменяющей историю.
 \end_layout
 
@@ -1875,6 +2041,13 @@ git filter-branch --index-filter "git rm -r -f --cached --ignore-unmatch
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Аналогично создаётся репозиторий для XYZ
 \end_layout
 
@@ -1902,6 +2075,13 @@ git filter-branch --index-filter "git rm -r -f --cached --ignore-unmatch
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 По опциям команды filter-branch смотрите документацию (git help filter-branch).
 \end_layout
 
@@ -1926,6 +2106,13 @@ git reset --soft HEAD~1 # удалить последний коммит, сох
 
 незакомиченными
 \begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
 \end_inset
 
 
@@ -2133,6 +2320,13 @@ git bisect reset       # закончить двоичный поиск
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Как только bisect нашёл источник ошибки - ревизию, в которой она была внесена,
  для нахождения ошибки остаётся проанализировать изменения в одном текущем
  коммите.
@@ -2161,6 +2355,61 @@ git bisect reset       # закончить двоичный поиск
 \begin_layout Itemize
 может быть сделан хотфикс (hotfix) ответвлением от master с последующим
  выпуском новой версии и слиянием исправлений в master и develop.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Случаются ситуации, когда в дереве истории Git нужно найти коммит, где ошибка
+ была исправлена, например, чтобы сообщить мэнтайнеру проекта для отметки
+ в баг-трекере или бэкпортирования (cherry-pick) в другие долгие 
+\begin_inset Quotes eld
+\end_inset
+
+longtime
+\begin_inset Quotes erd
+\end_inset
+
+ ветки проекта.
+ Для этого используются все те же самые команды, только вместо git bisect
+ bad нужно вводить git bisect good и наоборот, так как вместо 
+\begin_inset Quotes eld
+\end_inset
+
+плохого
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+bad
+\begin_inset Quotes erd
+\end_inset
+
+) коммита с ошибкой мы ищем 
+\begin_inset Quotes eld
+\end_inset
+
+хороший
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+) коммит с нужным исправлением.
 \end_layout
 
 \begin_layout Subsection
@@ -2277,6 +2526,13 @@ git push
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Команда
 \end_layout
 
@@ -2351,11 +2607,25 @@ git checkout master
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Допустим, мы хотим поместить проект mylib в подкаталог с тем же именем:
 \end_layout
 
 \begin_layout LyX-Code
 git read-tree --prefix=mylib/ -u mylib_branch
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2386,6 +2656,13 @@ git merge --squash -s subtree --no-commit mylib_branch # смержить в myl
 
 \begin_layout LyX-Code
 git commit   # зафиксировать изменения
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2507,6 +2784,13 @@ git fsck # выполнить проверку
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Иногда случается, что объект добавлен в индекс 
 \begin_inset Quotes eld
 \end_inset
@@ -2589,7 +2873,7 @@ status collapsed
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 \begin_inset CommandInset label
@@ -2751,7 +3035,7 @@ status collapsed
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Децентрализованный, но централизованный
@@ -2809,7 +3093,7 @@ status collapsed
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Главные ветви
@@ -2832,6 +3116,13 @@ master
 
 \begin_layout Itemize
 develop
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2908,6 +3199,13 @@ production-ready
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 У каждого типа ветвей есть своё специфическое назначение и строгий набор
  правил, от каких ветвей они могут порождаться, и в какие должны вливаться.
  Сейчас мы рассмотрим их по очереди.
@@ -2942,7 +3240,7 @@ status collapsed
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Ветви функциональностей (feature branches)
@@ -3053,6 +3351,13 @@ $ git push origin develop
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Флаг --no-ff вынуждает Git всегда создавать новый объект коммита при слиянии,
  даже если слияние может быть осуществлено алгоритмом fast-forward.
  Это позволяет не терять информацию о том, что ветка существовала, и группирует
@@ -3080,7 +3385,7 @@ status collapsed
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 no-fast-forward VS fast-forward
@@ -3212,6 +3517,13 @@ $ git commit -a -m "Bumped version number to 1.2"
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Мы создали новую ветку, переключились в неё, а затем выставили номер версии
  (bump version number).
  В нашем примере bump-version.sh — это вымышленный скрипт, который изменяет
@@ -3283,6 +3595,13 @@ $ git tag -a 1.2
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Теперь релиз издан и помечен тегом.
 \end_layout
 
@@ -3319,6 +3638,13 @@ Merge made by recursive.
 
 \begin_layout LyX-Code
 (Отчёт об изменениях)
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3361,7 +3687,7 @@ status collapsed
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Ветви исправлений (hotfix branches)
@@ -3449,6 +3775,13 @@ $ git commit -a -m "Bumped version number to 1.2.1"
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Не забывайте обновлять номер версии после создания ветви!
 \end_layout
 
@@ -3510,6 +3843,13 @@ $ git tag -a 1.2.1
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Замечание:
@@ -3540,6 +3880,13 @@ Merge made by recursive.
 
 \begin_layout LyX-Code
 (Отчёт об изменениях)
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3670,6 +4017,13 @@ git config --global user.email "you@example.com"
 
 \begin_layout LyX-Code
 git config --global user.name "Your Name"
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
