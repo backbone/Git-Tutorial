@@ -2163,6 +2163,54 @@ git bisect reset       # закончить двоичный поиск
  выпуском новой версии и слиянием исправлений в master и develop.
 \end_layout
 
+\begin_layout Standard
+Случаются ситуации, когда в дереве истории Git нужно найти коммит, где ошибка
+ была исправлена, например, чтобы сообщить мэнтайнеру проекта для отметки
+ в баг-трекере или бэкпортирования (cherry-pick) в другие долгие 
+\begin_inset Quotes eld
+\end_inset
+
+longtime
+\begin_inset Quotes erd
+\end_inset
+
+ ветки проекта.
+ Для этого используются все те же самые команды, только вместо git bisect
+ bad нужно вводить git bisect good и наоборот, так как вместо 
+\begin_inset Quotes eld
+\end_inset
+
+плохого
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+bad
+\begin_inset Quotes erd
+\end_inset
+
+) коммита с ошибкой мы ищем 
+\begin_inset Quotes eld
+\end_inset
+
+хороший
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+) коммит с нужным исправлением.
+\end_layout
+
 \begin_layout Subsection
 cherry-pick - обмен коммитами между ветками
 \end_layout
