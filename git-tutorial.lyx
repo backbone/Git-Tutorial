@@ -2150,6 +2150,56 @@ git rebase --continue # продолжить перепостроение ист
 \end_layout
 
 \begin_layout Subsubsection
+Удаление тега в репозитории на сервере
+\end_layout
+
+\begin_layout Standard
+Следующая команда удалит тег v0.1.2 на сервере:
+\end_layout
+
+\begin_layout LyX-Code
+git push origin :refs/tags/v0.1.2
+\end_layout
+
+\begin_layout Standard
+Следует не забыть также удалить тег локально:
+\end_layout
+
+\begin_layout LyX-Code
+git tag -d v0.1.2
+\end_layout
+
+\begin_layout Standard
+Иначе - при следующей отправки изменений он также попадёт на сервер.
+\end_layout
+
+\begin_layout Subsubsection
+Обновление указателя головы ветки на сервере без локальных изменений
+\end_layout
+
+\begin_layout Standard
+Следующая команда обновит указатель головы на сервере:
+\end_layout
+
+\begin_layout LyX-Code
+git update-ref refs/heads/master 573f69d
+\end_layout
+
+\begin_layout Standard
+Теперь голова ветки 
+\begin_inset Quotes eld
+\end_inset
+
+master
+\begin_inset Quotes erd
+\end_inset
+
+ в репозитории на сервере будет указывать на коммит с хешем 573f69d.
+ Это бывает полезно, когда хочется поработать над частью локальных коммитов,
+ отправляя невсе их сразу на сервер, а частями.
+\end_layout
+
+\begin_layout Subsubsection
 Синхронизация веток
 \end_layout
 
