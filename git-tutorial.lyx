@@ -2829,6 +2829,79 @@ git fsck --lost-found # с большой долей вероятности из
  ревизии
 \end_layout
 
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Бывает также, что пользователь отключил 
+\begin_inset Quotes eld
+\end_inset
+
+reflog
+\begin_inset Quotes erd
+\end_inset
+
+ в настройках Git по ошибке или по неопределённым личным обстоятельствам.
+ В таких случаях может буквально спасти опция 
+\begin_inset Quotes eld
+\end_inset
+
+--dangling
+\begin_inset Quotes erd
+\end_inset
+
+ у 
+\begin_inset Quotes eld
+\end_inset
+
+git fsck
+\begin_inset Quotes erd
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+$ git fsck --dangling
+\end_layout
+
+\begin_layout LyX-Code
+Checking object directories: 100% (256/256), done.
+\end_layout
+
+\begin_layout LyX-Code
+Checking objects: 100% (84/84), done.
+\end_layout
+
+\begin_layout LyX-Code
+dangling blob cd0120b458d5ab07efed5bb690b0eec8c1801b55
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+В конце выхлопа команды указаны хеши некогда существующих объектов, которые
+ никогда не использовались (не добавлялись в репозиторий).
+ Для восстановления требуемых объектов используется та же команда Git 
+\begin_inset Quotes eld
+\end_inset
+
+checkout
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Удачная модель ветвления
 \end_layout
