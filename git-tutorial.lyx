@@ -127,7 +127,7 @@ February 27, 2013
 \end_layout
 
 \begin_layout Date
-Версия 1.3.1
+Версия 1.3.2
 \end_layout
 
 \begin_layout Standard
@@ -2150,6 +2150,56 @@ git rebase --continue # продолжить перепостроение ист
 \end_layout
 
 \begin_layout Subsubsection
+Удаление тега в репозитории на сервере
+\end_layout
+
+\begin_layout Standard
+Следующая команда удалит тег v0.1.2 на сервере:
+\end_layout
+
+\begin_layout LyX-Code
+git push origin :refs/tags/v0.1.2
+\end_layout
+
+\begin_layout Standard
+Следует не забыть также удалить тег локально:
+\end_layout
+
+\begin_layout LyX-Code
+git tag -d v0.1.2
+\end_layout
+
+\begin_layout Standard
+Иначе - при следующей отправки изменений он также попадёт на сервер.
+\end_layout
+
+\begin_layout Subsubsection
+Обновление указателя головы ветки на сервере без локальных изменений
+\end_layout
+
+\begin_layout Standard
+Следующая команда обновит указатель головы на сервере:
+\end_layout
+
+\begin_layout LyX-Code
+git update-ref refs/heads/master 573f69d
+\end_layout
+
+\begin_layout Standard
+Теперь голова ветки 
+\begin_inset Quotes eld
+\end_inset
+
+master
+\begin_inset Quotes erd
+\end_inset
+
+ в репозитории на сервере будет указывать на коммит с хешем 573f69d.
+ Это бывает полезно, когда хочется поработать над частью локальных коммитов,
+ отправляя невсе их сразу на сервер, а частями.
+\end_layout
+
+\begin_layout Subsubsection
 Синхронизация веток
 \end_layout
 
@@ -2827,6 +2877,79 @@ git fsck --lost-found # с большой долей вероятности из
 \begin_layout LyX-Code
                       # в .git/lost-found/other, только в место имени хеш
  ревизии
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Бывает также, что пользователь отключил 
+\begin_inset Quotes eld
+\end_inset
+
+reflog
+\begin_inset Quotes erd
+\end_inset
+
+ в настройках Git по ошибке или по неопределённым личным обстоятельствам.
+ В таких случаях может буквально спасти опция 
+\begin_inset Quotes eld
+\end_inset
+
+--dangling
+\begin_inset Quotes erd
+\end_inset
+
+ у 
+\begin_inset Quotes eld
+\end_inset
+
+git fsck
+\begin_inset Quotes erd
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+$ git fsck --dangling
+\end_layout
+
+\begin_layout LyX-Code
+Checking object directories: 100% (256/256), done.
+\end_layout
+
+\begin_layout LyX-Code
+Checking objects: 100% (84/84), done.
+\end_layout
+
+\begin_layout LyX-Code
+dangling blob cd0120b458d5ab07efed5bb690b0eec8c1801b55
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+В конце выхлопа команды указаны хеши некогда существующих объектов, которые
+ никогда не использовались (не добавлялись в репозиторий).
+ Для восстановления требуемых объектов используется та же команда Git 
+\begin_inset Quotes eld
+\end_inset
+
+checkout
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
